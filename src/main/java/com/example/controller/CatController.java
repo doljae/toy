@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.domain.Cat;
+import com.example.dto.RequestDto;
 import com.example.service.CatService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,5 +29,10 @@ public class CatController {
     @GetMapping("/cat/{id}")
     public ResponseEntity<Cat> getCatList(@PathVariable("id") int id) {
         return ResponseEntity.ok(catService.getCat(id));
+    }
+
+    @PostMapping("/cat")
+    public ResponseEntity getCatList(@RequestBody RequestDto requestDto) {
+        return ResponseEntity.ok().build();
     }
 }
