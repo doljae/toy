@@ -1,16 +1,24 @@
 package com.example.configuration;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+
+import com.example.dto.ResponseDto;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.examples.Example;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.parameters.HeaderParameter;
+import io.swagger.v3.oas.models.parameters.Parameter;
 
 @Configuration
 public class SwaggerConfig {
@@ -62,10 +70,6 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        StringSchema schema1 = new StringSchema()._default("default1");
-        StringSchema schema2 = new StringSchema()._default("default2");
-        StringSchema schema3 = new StringSchema()._default("default3");
-        StringSchema schema4 = new StringSchema()._default("default4");
         return new OpenAPI()
             .components(new Components()
                             .addParameters("myGlobalHeader1",
@@ -73,24 +77,32 @@ public class SwaggerConfig {
                                                .required(true)
                                                .name("My-Global-Header1")
                                                .description("My Global Header1")
-                                               .schema(schema1))
+                                               .schema(new StringSchema()._default("default1")))
                             .addParameters("myGlobalHeader2",
                                            new HeaderParameter()
                                                .required(true)
                                                .name("My-Global-Header2")
                                                .description("My Global Header2")
-                                               .schema(schema2))
-                            .addParameters("myGlobalHeader3",
-                                           new HeaderParameter()
-                                               .required(true)
-                                               .name("My-Global-Header3")
-                                               .description("My Global Header3")
-                                               .schema(schema3))
-                            .addParameters("myGlobalHeader4",
-                                           new HeaderParameter()
-                                               .required(true)
-                                               .name("My-Global-Header4")
-                                               .description("My Global Header4")
-                                               .schema(schema4)));
+                                               .schema(new StringSchema()._default("default2"))));
     }
+
+    private Parameter generateHeader(String name, String description, String defaultValue) {
+        return new Parameter()
+            .in("header")
+            .required(true)
+            .name(name)
+            .description(description)
+            .schema(new StringSchema()._default(defaultValue));
+    }
+
+    private Map<HttpStatus, Example> getExampleMap() {
+        final Map<HttpStatus, Example> exampleMap = new EnumMap<HttpStatus, Example>(HttpStatus.class);
+        exampleMap.put(HttpStatus.BAD_REQUEST, exampleOfResponse400);
+        exampleMap.put(HttpStatus.INTERNAL_SERVER_ERROR, exampleOfResponse500);
+
+        return exampleMap;
+    }
+
+    private final Example exampleOfResponse400 = new Example().value(ResponseDto.builder().build());
+    private final Example exampleOfResponse500 = new Example().value(ResponseDto.builder().build());
 }
