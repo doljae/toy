@@ -11,3 +11,11 @@ springdoc:
     tagsSorter: alpha
     defaultModelsExpandDepth: 0
     docExpansion: none
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
+logging:
+  level:
+    com.example.feign.TestFeignClient: DEBUG
