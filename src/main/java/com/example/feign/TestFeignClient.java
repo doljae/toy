@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.domain.Color;
-import com.example.dto.ResponseDto;
+
+import feign.Response;
 
 @FeignClient(name = "test-feign", url = "http://localhost:1234")
 public interface TestFeignClient {
 
     @GetMapping("/test")
     @CollectionFormat(feign.CollectionFormat.CSV)
-    ResponseDto test(@RequestParam("types") List<Color> types);
+    Response test(@RequestParam("types") List<Color> types);
 }

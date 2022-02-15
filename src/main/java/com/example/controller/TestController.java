@@ -14,6 +14,12 @@ public class TestController {
 
     @GetMapping("/test")
     public ResponseDto test(@RequestParam("types") List<Color> types) {
-        return ResponseDto.builder().build();
+
+        types.forEach(color -> {
+            System.out.println(color);
+            System.out.println(color.getClass());
+        });
+
+        return ResponseDto.builder().id(1).name("seokjae").age(31).build();
     }
 }
