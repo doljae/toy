@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseDto {
-    private int id;
-    private String name;
-    private int age;
+    private Boolean status;
+    private int code;
+    private String description;
 }

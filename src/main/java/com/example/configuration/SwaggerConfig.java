@@ -1,7 +1,10 @@
 package com.example.configuration;
 
-import java.util.EnumMap;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.customizers.OpenApiCustomiser;
@@ -16,13 +19,19 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.examples.Example;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.media.Content;
+import io.swagger.v3.oas.models.media.MediaType;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.parameters.HeaderParameter;
 import io.swagger.v3.oas.models.parameters.Parameter;
+import io.swagger.v3.oas.models.responses.ApiResponse;
+import io.swagger.v3.oas.models.responses.ApiResponses;
 
 @Configuration
 public class SwaggerConfig {
 
+    private static final String APPLICATION_JSON_VALUE =
+        org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
     private static final String TITLE = "TITLE";
     private static final String DESCRIPTION = "DESCRIPTION";
     private static final String LICENSE = "LICENSE";
@@ -37,14 +46,10 @@ public class SwaggerConfig {
                              .pathsToMatch("/cat/**")
                              .addOpenApiCustomiser(globalOpenApiCustomer())
                              .addOperationCustomizer((operation, handlerMethod) ->
-                                                         operation.addParametersItem(new HeaderParameter().$ref(
-                                                                      "#/components/parameters/myGlobalHeader1"))
-                                                                  .addParametersItem(new HeaderParameter().$ref(
-                                                                      "#/components/parameters/myGlobalHeader2"))
-                                                                  .addParametersItem(new HeaderParameter().$ref(
-                                                                      "#/components/parameters/myGlobalHeader3"))
-                                                                  .addParametersItem(new HeaderParameter().$ref(
-                                                                      "#/components/parameters/myGlobalHeader4")))
+                                                         operation.addParametersItem(new Parameter().$ref(
+                                                                      "#/components/parameters/CatOnlyHeader1"))
+                                                                  .addParametersItem(new Parameter().$ref(
+                                                                      "#/components/parameters/CatOnlyHeader2")))
                              .build();
     }
 
@@ -57,6 +62,25 @@ public class SwaggerConfig {
                              .build();
     }
 
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+            .components(new Components()
+                            .addParameters("CatOnlyHeader1",
+                                           new Parameter()
+                                               .in("header")
+                                               .required(true)
+                                               .name("Cat-Only-Header1")
+                                               .description("Cat Only Header1 description")
+                                               .schema(new StringSchema()._default("headerDefaultValue")))
+                            .addParameters("CatOnlyHeader2",
+                                           new HeaderParameter()
+                                               .required(true)
+                                               .name("Cat-Only-Header2")
+                                               .description("Cat Only Header2 description")
+                                               .schema(new StringSchema()._default("headerDefaultValue"))));
+    }
+
     public static OpenApiCustomiser globalOpenApiCustomer() {
         return openApi ->
             openApi.info(new Info()
@@ -64,45 +88,62 @@ public class SwaggerConfig {
                              .description(DESCRIPTION)
                              .license(new License().name(LICENSE).url(LICENSE_URL))
                              .termsOfService(TERMS_OF_SERVICE_URL)
-                             .version(VERSION));
+                             .version(VERSION))
+                   .getPaths()
+                   .values()
+                   .forEach(pathItem ->
+                                pathItem.readOperations()
+                                        .forEach(operation -> {
+                                            final ApiResponses apiResponses = operation.getResponses();
+                                            for (Entry<HttpStatus, ApiResponse> entry : getApiResponseMap().entrySet()) {
+                                                apiResponses.addApiResponse(
+                                                    Integer.toString(entry.getKey().value()),
+                                                    entry.getValue());
+                                            }
+                                            operation.addParametersItem(new HeaderParameter()
+                                                                            .required(true)
+                                                                            .name("Global-Header1")
+                                                                            .description(
+                                                                                "Global Header1 description")
+                                                                            .schema(new StringSchema()._default(
+                                                                                "headerDefaultValue")));
+                                        }));
 
     }
 
-    @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-            .components(new Components()
-                            .addParameters("myGlobalHeader1",
-                                           new HeaderParameter()
-                                               .required(true)
-                                               .name("My-Global-Header1")
-                                               .description("My Global Header1")
-                                               .schema(new StringSchema()._default("default1")))
-                            .addParameters("myGlobalHeader2",
-                                           new HeaderParameter()
-                                               .required(true)
-                                               .name("My-Global-Header2")
-                                               .description("My Global Header2")
-                                               .schema(new StringSchema()._default("default2"))));
+    private static Map<HttpStatus, ApiResponse> getApiResponseMap() {
+        final ApiResponse global400ApiResponses
+            = new ApiResponse().description(BAD_REQUEST.getReasonPhrase())
+                               .content(new Content().addMediaType(APPLICATION_JSON_VALUE,
+                                                                   new MediaType().addExamples("sample",
+                                                                                               exampleOfResponse400)
+                                                                                  .addExamples("sample2",
+                                                                                               exampleOfResponse400V2)));
+
+        final ApiResponse global500ApiResponses
+            = new ApiResponse().description(INTERNAL_SERVER_ERROR.getReasonPhrase())
+                               .content(new Content().addMediaType(APPLICATION_JSON_VALUE,
+                                                                   new MediaType().addExamples("sample",
+                                                                                               exampleOfResponse500)));
+
+        return Map.of(BAD_REQUEST, global400ApiResponses,
+                      INTERNAL_SERVER_ERROR, global500ApiResponses);
     }
 
-    private Parameter generateHeader(String name, String description, String defaultValue) {
-        return new Parameter()
-            .in("header")
-            .required(true)
-            .name(name)
-            .description(description)
-            .schema(new StringSchema()._default(defaultValue));
-    }
+    private static final Example exampleOfResponse400 =
+        new Example().value(ResponseDto.builder().status(false)
+                                       .code(BAD_REQUEST.value())
+                                       .description(BAD_REQUEST.getReasonPhrase())
+                                       .build());
 
-    private Map<HttpStatus, Example> getExampleMap() {
-        final Map<HttpStatus, Example> exampleMap = new EnumMap<HttpStatus, Example>(HttpStatus.class);
-        exampleMap.put(HttpStatus.BAD_REQUEST, exampleOfResponse400);
-        exampleMap.put(HttpStatus.INTERNAL_SERVER_ERROR, exampleOfResponse500);
-
-        return exampleMap;
-    }
-
-    private final Example exampleOfResponse400 = new Example().value(ResponseDto.builder().build());
-    private final Example exampleOfResponse500 = new Example().value(ResponseDto.builder().build());
+    private static final Example exampleOfResponse400V2 =
+        new Example().value(ResponseDto.builder().status(false)
+                                       .code(1234)
+                                       .description(BAD_REQUEST.getReasonPhrase() + " sample 2")
+                                       .build());
+    private static final Example exampleOfResponse500 =
+        new Example().value(ResponseDto.builder().status(false)
+                                       .code(INTERNAL_SERVER_ERROR.value())
+                                       .description(INTERNAL_SERVER_ERROR.getReasonPhrase())
+                                       .build());
 }

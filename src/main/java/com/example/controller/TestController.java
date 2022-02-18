@@ -20,6 +20,6 @@ public class TestController {
             System.out.println(color.getClass());
         });
 
-        return ResponseDto.builder().id(1).name("seokjae").age(31).build();
+        return ResponseDto.builder().build();
     }
 }

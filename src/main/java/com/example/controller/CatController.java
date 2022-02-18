@@ -13,14 +13,30 @@ import com.example.domain.Cat;
 import com.example.dto.RequestDto;
 import com.example.service.CatService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+@Tag(
+    name = "Cat Controller V1",
+    description = "API for Cat"
+)
 @RestController
 @RequiredArgsConstructor
 public class CatController {
 
     private final CatService catService;
 
+    @Operation(
+        summary = "Return all cats",
+        description = """
+            | Response Code | Status         |
+            | ------------- | -------------  |
+            | 1234          | DB error       |
+            | 5678          | Some error     |
+            | 9999          | Maintenance    |
+            """
+    )
     @GetMapping("/cat/all")
     public ResponseEntity<List<Cat>> getCatList() {
         return ResponseEntity.ok(catService.getCatList());
