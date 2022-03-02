@@ -11,12 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.domain.Cat;
 import com.example.dto.RequestDto;
-import com.example.dto.ResponseDto;
 import com.example.service.CatService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +46,6 @@ public class CatController {
     @Operation(
         description = "Find person by e-mail",
         responses = {
-            // @ApiResponse(content = @Content(schema = @Schema(implementation = ResponseDto.class)), responseCode = "200"),
             @ApiResponse(responseCode = "404", description = "There's no Cat in DB")
         })
     @GetMapping("/cat/all/annotation")
