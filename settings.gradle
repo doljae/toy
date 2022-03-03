@@ -1,1 +1,4 @@
-rootProject.name = 'demo'
+rootProject.name = 'toy'
+include 'japring'
+include 'kopring'
+
