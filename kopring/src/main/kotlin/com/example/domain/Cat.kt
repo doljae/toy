@@ -1,4 +1,8 @@
 package com.example.domain
 
-class Cat {
+public class Cat(val name: String, val age: Int) {
+
+    override fun toString(): String {
+        return "Cat() $name $age"
+    }
 }

@@ -19,13 +19,18 @@ subprojects {
         mavenCentral()
     }
 
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
+    dependencyManagement {
+        imports {
+
+        }
+        dependencies {
+            dependency "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
+            dependency "io.kotest:kotest-runner-junit5:5.0.3"
+            dependency "io.kotest:kotest-assertions-core:5.0.3"
+            dependency "io.kotest:kotest-property:5.0.3"
         }
     }
+}
 
-    dependencies {
-
-    }
+properties{
 }
