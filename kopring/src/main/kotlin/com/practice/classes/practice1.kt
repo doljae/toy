@@ -1,7 +1,5 @@
 package com.practice.classes;
 
-public class practice1 {}
-
 
 //private class Person constructor(firstName: String) {}
 private class Person2(name: String) {

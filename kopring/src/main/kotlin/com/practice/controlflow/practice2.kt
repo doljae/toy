@@ -1,7 +1,5 @@
 package com.practice.controlflow
 
-class practice2 {
-}
 
 enum class Color {
     RED, GREEN, BLUE

@@ -2,9 +2,6 @@ package com.practice.controlflow
 
 import java.util.*
 
-class practice {
-}
-
 fun main() {
     val a = 5
     val b = 10

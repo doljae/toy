@@ -1,9 +1,5 @@
 package com.practice.typecheck
 
-class practice01 {
-
-}
-
 fun cast(obj: Any) {
     if (obj is String) {
         println(obj.length)

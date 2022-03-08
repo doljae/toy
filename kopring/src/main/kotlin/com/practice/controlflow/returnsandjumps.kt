@@ -1,7 +1,5 @@
 package com.practice.controlflow
 
-class returnsandjumps {}
-
 fun main() {
 
 //    for (i in 1..100) {
