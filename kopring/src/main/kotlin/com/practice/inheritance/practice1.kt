@@ -9,8 +9,8 @@ class Apple : Example() {
 
 }
 
-open class Base(p: Int)
-class Derived(p: Int) : Base(p)
+//open class Base(p: Int)
+//class Derived(p: Int) : Base(p)
 
 open class View {
     constructor(ctx: Context)
