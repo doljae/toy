@@ -1,4 +1,4 @@
-package com.practice.controlflow
+package com.example.practice.controlflow
 
 fun main() {
 

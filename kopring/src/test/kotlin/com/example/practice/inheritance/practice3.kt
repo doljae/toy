@@ -1,4 +1,4 @@
-package com.practice.inheritance
+package com.example.practice.inheritance
 
 open class Rectangle1 {
     open fun draw() {

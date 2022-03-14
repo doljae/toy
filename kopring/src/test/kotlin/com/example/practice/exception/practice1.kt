@@ -1,4 +1,4 @@
-package com.practice.exception
+package com.example.practice.exception
 
 const val input = "5"
 

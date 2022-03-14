@@ -1,10 +1,10 @@
-package com.practice.classes
+package com.example.practice.classes
 
 abstract class Polygon{
     abstract fun draw()
 }
 
-class Rectangle:Polygon(){
+class Rectangle: Polygon(){
     override fun draw() {
         TODO("Not yet implemented")
     }

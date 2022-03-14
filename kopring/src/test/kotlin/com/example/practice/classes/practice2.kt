@@ -1,4 +1,4 @@
-package com.practice.classes
+package com.example.practice.classes
 
 
 

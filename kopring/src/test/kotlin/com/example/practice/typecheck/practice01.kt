@@ -1,4 +1,4 @@
-package com.practice.typecheck
+package com.example.practice.typecheck
 
 fun cast(obj: Any) {
     if (obj is String) {

@@ -1,4 +1,4 @@
-package com.practice.inheritance
+package com.example.practice.inheritance
 
 import javax.naming.Context
 import javax.swing.text.AttributeSet
