@@ -8,6 +8,17 @@ open class Rectangle1 {
     val borderColor: String get() = "black"
 }
 
+interface Polygon1{
+    fun draw(){}
+}
+
+class Square():Rectangle1(), Polygon1{
+    override fun draw() {
+        super<Rectangle1>.draw()
+        super<Polygon1>.draw()
+    }
+}
+
 class FilledRectangle1 : Rectangle1() {
     override fun draw() {
         super.draw()
