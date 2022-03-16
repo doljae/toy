@@ -33,3 +33,17 @@ var setterVisibility: String = "abc"
     private set
 
 var setterWithAnnotation: Any? = null
+
+var counter = 0
+    set(value) {
+        if (value >= 0)
+            field = value
+    }
+
+fun main() {
+    counter = 10
+    println(counter)
+
+    counter = -10
+    println(counter)
+}
