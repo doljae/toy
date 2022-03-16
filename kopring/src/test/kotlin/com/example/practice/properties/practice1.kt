@@ -18,3 +18,18 @@ fun copyAddress(address: Address): Address {
 
     return result
 }
+
+var initialized = 1
+const val inferredType = 1
+
+class Rectangle(val width: Int, val height: Int) {
+    val area: Int
+        get() = this.width * this.height
+
+    val area2 get() = this.width * this.height
+}
+
+var setterVisibility: String = "abc"
+    private set
+
+var setterWithAnnotation: Any? = null
