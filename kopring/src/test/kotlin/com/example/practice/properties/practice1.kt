@@ -58,7 +58,21 @@ public val table: Map<String, Int>
     }
 
 const val SUBSYSTEM_DEPRECATES: String = "This is test"
+
 @Deprecated(SUBSYSTEM_DEPRECATES)
 fun foo() {
+
+}
+
+public class MyTest {
+    lateinit var subject: String
+
+    fun setUp() {
+        subject = "late init"
+    }
+
+    fun test() {
+        println(subject.length)
+    }
 
 }
