@@ -56,3 +56,9 @@ public val table: Map<String, Int>
         }
         return _table ?: throw AssertionError("Set to null by another thread")
     }
+
+const val SUBSYSTEM_DEPRECATES: String = "This is test"
+@Deprecated(SUBSYSTEM_DEPRECATES)
+fun foo() {
+
+}
