@@ -15,6 +15,9 @@ import feign.Response;
 public interface TestFeignClient {
 
     @GetMapping("/test")
-    @CollectionFormat(feign.CollectionFormat.CSV)
     Response test(@RequestParam("types") List<Color> types);
+
+    @GetMapping("/testWithCollectionFormat")
+    @CollectionFormat(feign.CollectionFormat.CSV)
+    Response testWithCollectionFormat(@RequestParam("types") List<Color> types);
 }

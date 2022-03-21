@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,8 @@ public class TestController {
             System.out.println(color);
             System.out.println(color.getClass());
         });
+
+        String collect = types.stream().map(Enum::name).collect(Collectors.joining(","));
 
         return ResponseDto.builder().build();
     }
