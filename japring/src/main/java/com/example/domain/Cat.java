@@ -11,9 +11,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cat {
+public class Cat implements Pet{
     private Long id;
     private String name;
     private LocalDate birthday;
     private Color color;
+
+    @Override
+    public String type() {
+        return "CAT";
+    }
+
+    @Override
+    public void cry() {
+        System.out.println("야옹");
+    }
 }
