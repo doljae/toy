@@ -41,3 +41,22 @@ fun printHello(name: String?): Unit {
     else
         println("Hi there!")
 }
+
+fun double1(x: Int): Int = x * 2
+fun double2(x: Int) = x * 2
+
+fun <T> asList(vararg ts: T): List<T> {
+    val result = ArrayList<T>()
+    for (t in ts) {
+        result.add(t)
+    }
+    return result
+}
+
+val list1 = asList(1, 2, 3)
+
+val a = arrayOf(1, 2, 3)
+val list2 = asList(-1, 0, *a, 4)
+
+val b = intArrayOf(1, 2, 3)
+val list = asList(-1, 0, *b.toTypedArray(), 4)
