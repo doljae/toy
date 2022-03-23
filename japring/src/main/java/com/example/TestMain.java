@@ -5,6 +5,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.util.StringUtils;
 
+import com.example.domain.Cat;
+import com.example.domain.Dog;
+import com.example.domain.Pet;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -56,5 +60,44 @@ public class TestMain {
         final List<Person> people = temp2.stream().filter(person -> person.getAge() > 25).toList();
         people.get(0).setAge(5555);
         System.out.println(people);
+
     }
+//
+//    public void testSwitch(Pet pet){
+//        switch (pet){
+//            case Cat cat-> System.out.println("111");
+//            case Cat cat->{System.out.println(1);
+//                System.out.println(2);}
+//            case Dog dog -> System.out.println("dog");
+//            default -> System.out.println("null");
+//        }
+//    }
+//
+//    static double getDoubleUsingSwitch(Object o) {
+//        return switch (o) {
+//            case Integer i -> i.doubleValue();
+//            case Float f -> f.doubleValue();
+//            case String s -> Double.parseDouble(s);
+//            default -> 0d;
+//        };
+//    }
+//
+//    enum SingleUsePlastic {
+//        CUP, STRAW, BOTTLE
+//    }
+//    int getDamageToPlanet(SingleUsePlastic plastic) {
+//        int damage = -1;
+//        switch (plastic) {
+//            case CUP:
+//                damage = 100;
+//                break;
+//            case STRAW:
+//                damage = 200;
+//                break;
+//            case BOTTLE:
+//                damage = 300;
+//                break;
+//        }
+//        return damage;
+//    }
 }
