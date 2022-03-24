@@ -25,6 +25,10 @@ fun main() {
     val f: Int = if (b != null) b.length else -1
     val ff = b?.length ?: -1
 
+    val aInt: Int? = a as? Int
+    val nullableList: List<Int?>=listOf(1, 2, null, 4)
+    val intList: List<Int> = nullableList.filterNotNull();
+
 }
 
 fun foo(node: Node): String? {
@@ -32,3 +36,4 @@ fun foo(node: Node): String? {
     val name = node.nodeName ?: throw IllegalArgumentException()
     return "test"
 }
+
