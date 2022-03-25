@@ -26,8 +26,8 @@ fun main() {
     val ff = b?.length ?: -1
 
     val aInt: Int? = a as? Int
-    val nullableList: List<Int?>=listOf(1, 2, null, 4)
-    val intList: List<Int> = nullableList.filterNotNull();
+//    val nullableList: List<Int?>=listOf(1, 2, null, 4)
+//    val intList: List<Int> = nullableList.filterNotNull();
 
 }
 
