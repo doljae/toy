@@ -22,6 +22,13 @@ fun whenAssign(obj: Any): Any {
     return result
 }
 
+class Animal(val name: String)
+class Zoo(val animals: List<Animal>) {
+    operator fun iterator(): Iterator<Animal> {
+        return animals.iterator()
+    }
+}
+
 fun main() {
     println(whenAssign("Hello"))
     println(whenAssign(3.4))
@@ -29,5 +36,11 @@ fun main() {
     println(whenAssign(MyClass()))
 
     cases(1L)
+
+    val zoo = Zoo(listOf(Animal("zebra"), Animal("lion")))
+
+    for (animal in zoo) {
+        println("Watch out, it's a ${animal.name}")
+    }
 }
 
