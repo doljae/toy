@@ -1,2 +1,14 @@
 server:
   port: 5678
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:mydb;MODE=MYSQL;
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
