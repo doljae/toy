@@ -13,8 +13,9 @@ class TestController {
     }
 
     @GetMapping("/test2/{id}")
-    fun testApi2(@PathVariable id: String) {
+    fun testApi2(@PathVariable id: String): String {
         println("path variable id:$id")
+        return "it works!"
     }
 
 }
