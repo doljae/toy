@@ -1,3 +1,3 @@
 package com.petstore.pet
 
-class Dog : Pet()
+class Dog : Pet("")

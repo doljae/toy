@@ -1,4 +1,4 @@
-package com.petstore;
+package com.dummy;
 
 
 interface SomethingWithCallback {
@@ -82,11 +82,11 @@ class ConcreteClass extends AbstractClass{
 
 
 public class test{
-    public static void main(String[] args) {
-        SomeService   service       = new SomeService();
-        WrappedObject wrappedObject = new WrappedObject(service);
-        Wrapper       wrapper       = new Wrapper(wrappedObject);
-        wrapper.doSomething();
-        new ConcreteClass();
-    }
+//    public static void main(String[] args) {
+//        SomeService   service       = new SomeService();
+//        WrappedObject wrappedObject = new WrappedObject(service);
+//        Wrapper       wrapper       = new Wrapper(wrappedObject);
+//        wrapper.doSomething();
+//        new ConcreteClass();
+//    }
 }
