@@ -8,6 +8,6 @@ abstract class Pet(
     abstract fun cry()
 
     override fun toString(): String {
-        return "${this.name}, name: $name, age: $age, gender: $gender"
+        return "${this.javaClass.name}, name: $name, age: $age, gender: $gender"
     }
 }

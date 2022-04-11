@@ -22,4 +22,8 @@ class DogStore : Store {
     override fun updatePet(id: Int, pet: Pet) {
         cages[id] = pet as Dog
     }
+
+    override fun toString(): String {
+        return "${this.javaClass.name}, cages: $cages"
+    }
 }
