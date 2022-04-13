@@ -10,4 +10,8 @@ abstract class Pet(
     override fun toString(): String {
         return "${this.javaClass.name}, name: $name, age: $age, gender: $gender"
     }
+
+    fun canMate(partner: Pet): Boolean {
+        return this.gender != partner.gender
+    }
 }

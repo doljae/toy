@@ -6,7 +6,7 @@ interface Store {
 
     fun addPet(pet: Pet)
 
-    fun getPet(id: Int):Pet
+    fun getPet(id: Int): Pet
 
     fun removePet(id: Int)
 
