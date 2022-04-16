@@ -1,12 +1,8 @@
 package com.example.test;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.ForkJoinPool;
 import java.util.stream.IntStream;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,16 +30,30 @@ public class FolkJoinPoolTest {
 //        executorService.shutdown();
 
         // use stream + parallel()
-        log.info("use stream + parallel()");
-        IntStream.range(0, 20).parallel().forEach(index -> {
-            System.out.println(
-                "Starting " + Thread.currentThread().getName() + ",    index=" + index + ", " + new Date());
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                log.error("InterruptedException", e);
-            }
-        });
+//        log.info("use stream + parallel()");
+//        IntStream.range(0, 20).parallel().forEach(index -> {
+//            System.out.println(
+//                "Starting " + Thread.currentThread().getName() + ",    index=" + index + ", " + new Date());
+//            try {
+//                Thread.sleep(5000);
+//            } catch (InterruptedException e) {
+//                log.error("InterruptedException", e);
+//            }
+//        });
+
+        log.info("custom FolkJoinPool");
+        final ForkJoinPool forkJoinPool = new ForkJoinPool(5);
+        forkJoinPool.submit(() -> {
+            IntStream.range(0, 10).parallel().forEach(index -> {
+                System.out.println(
+                    "Starting " + Thread.currentThread().getName() + ", index=" + index + ", " + new Date());
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+
+                }
+            });
+        }).get();
 
     }
 }
