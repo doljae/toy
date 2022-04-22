@@ -1,6 +1,7 @@
 server:
   port: 1234
 
+
 springdoc:
   default-consumes-media-type: application/json
   default-produces-media-type: application/json
