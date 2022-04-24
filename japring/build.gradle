@@ -13,6 +13,8 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // RxJava
+    implementation group: 'io.reactivex.rxjava3', name: 'rxjava', version: '3.1.4'
 }
 
 test {
