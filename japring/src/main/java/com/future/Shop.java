@@ -13,19 +13,6 @@ public class Shop {
         this.shopName = shopName;
     }
 
-    public Future<Double> getPriceAsync(String product) {
-        final CompletableFuture<Double> futurePrice = new CompletableFuture<>();
-        new Thread(() -> {
-            final double price = calculatePrice(product);
-            futurePrice.complete(price);
-        }).start();
-        return futurePrice;
-    }
-
-    public double getPrice(String product) {
-        return calculatePrice(product);
-    }
-
     private double calculatePrice(String product) {
         delay();
         return new Random().nextDouble() * product.charAt(0) + product.charAt(1);
@@ -37,6 +24,33 @@ public class Shop {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public double getPrice(String product) {
+        return calculatePrice(product);
+    }
+
+    public Future<Double> getPriceAsync(String product) {
+        final CompletableFuture<Double> futurePrice = new CompletableFuture<>();
+        new Thread(() -> {
+            final double price = calculatePrice(product);
+            futurePrice.complete(price);
+        }).start();
+        return futurePrice;
+    }
+
+    // 비동기 로직을 처리 시 Exception이 발생하면 이 메서드를 호출한 스레드에 Exception을 전파해야 함
+    public Future<Double> getPriceAsyncV2(String product) {
+        final CompletableFuture<Double> futurePrice = new CompletableFuture<>();
+        new Thread(() -> {
+            try {
+                final double price = calculatePrice(product);
+                futurePrice.complete(price);
+            } catch (Exception exception) {
+                futurePrice.completeExceptionally(exception);
+            }
+        }).start();
+        return futurePrice;
     }
 
     private static void doSomethingElse() {
@@ -64,7 +78,6 @@ public class Shop {
         doSomethingElse();
         doSomethingElse();
         doSomethingElse();
-
 
         try {
             // 위의 작업이 다 끝나면 future에 값이 반환될때까지 block 한다.
