@@ -5,6 +5,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import lombok.Getter;
+
+@Getter
 public class Shop {
 
     private String shopName;
