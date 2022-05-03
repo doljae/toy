@@ -53,6 +53,11 @@ public class Shop {
         return futurePrice;
     }
 
+    // 팩토리메서드로 비동기 CompletableFuture 사용하기
+    public Future<Double> getPriceAsyncV3(String product) {
+        return CompletableFuture.supplyAsync(() -> calculatePrice(product));
+    }
+
     private static void doSomethingElse() {
         System.out.println("do someThing Else");
         System.out.println("do someThing Else");
