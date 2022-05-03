@@ -2,6 +2,7 @@ package com.future;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class BlockingShop {
 
@@ -22,6 +23,19 @@ public class BlockingShop {
                                                                 shop.getPrice(product))).toList();
     }
 
+    // CompletableFuture를 이용한 비동기 처리, 별도 스레드에서 비동기로 작업을 처리하고 결과를 blocking해서 묶는다.
+    static List<String> findPricesV3(String product) {
+        // 1번 map으로 비동기 메서드를 수행해 가격을 각각 계산한다.
+        final List<CompletableFuture<String>> pricesFuture =
+            shops.stream().map(shop -> CompletableFuture.supplyAsync(() ->
+                                                                         String.format("%s price is %.2f",
+                                                                                       shop.getShopName(),
+                                                                                       shop.getPrice(product)
+                                                                         ))).toList();
+        // 2번 map으로 수행된 CompletableFuture의 결과를 기다리면서 비동기 메서드가 끝나길 기다린다.
+        return pricesFuture.stream().map(CompletableFuture::join).toList();
+    }
+
     public static void main(String[] args) {
         System.out.println("==== blocking method start ====");
         final long start = System.nanoTime();
@@ -34,5 +48,11 @@ public class BlockingShop {
         System.out.println(findPricesV2("iPhone30"));
         final long duration2 = (System.nanoTime() - start2) / 1_000_000;
         System.out.println("Done in " + duration2 + " msecs");
+
+        System.out.println("==== use CompletableFuture start ====");
+        final long start3 = System.nanoTime();
+        System.out.println(findPricesV3("iPhone30"));
+        final long duration3 = (System.nanoTime() - start3) / 1_000_000;
+        System.out.println("Done in " + duration3 + " msecs");
     }
 }
