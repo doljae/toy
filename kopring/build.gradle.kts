@@ -1,42 +1,38 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-tasks.getByName<Jar>("jar") {
-    enabled = true
-}
-
-tasks.getByName<Jar>("bootJar") {
-    enabled = false
+plugins {
+    id("org.springframework.boot") version "2.6.7"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    kotlin("jvm") version "1.6.21"
+    kotlin("plugin.spring") version "1.6.21"
+    kotlin("plugin.jpa") version "1.6.21"
 }
 
 //group = "com.example"
 //version = "0.0.1-SNAPSHOT"
 //java.sourceCompatibility = JavaVersion.VERSION_17
 
-plugins {
-//    id("org.springframework.boot") version "2.6.5"
-//    id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.6.10"
-    kotlin("plugin.spring") version "1.6.10"
-    // important for using JPA with kotlin
-    kotlin("plugin.jpa") version "1.6.10"
+configurations {
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-    implementation("com.h2database:h2:2.1.210")
-
-    implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
-
+    compileOnly("org.projectlombok:lombok")
+    runtimeOnly("mysql:mysql-connector-java")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.kotest:kotest-runner-junit5")
-    testImplementation("io.kotest:kotest-assertions-core")
-    testImplementation("io.kotest:kotest-property")
 }
 
 tasks.withType<KotlinCompile> {
@@ -49,7 +45,3 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
-
-//tasks.withType<Test>().configureEach {
-//    useJUnitPlatform()
-//}
