@@ -39,6 +39,9 @@ subprojects {
             dependency("org.springdoc:springdoc-openapi-ui:1.6.8")
             dependency("io.reactivex.rxjava3:rxjava:3.1.4")
             dependency("com.h2database:h2:2.1.212")
+//            dependency("org.mockito:mockito-core:4.5.1")
+//            dependency("org.mockito:mockito-junit-jupiter:4.5.1")
+//            dependency("net.bytebuddy:byte-buddy-agent:1.12.10")
         }
     }
 

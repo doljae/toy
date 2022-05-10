@@ -31,6 +31,7 @@ class WebClientServiceTest {
     void test() {
         when(webClient.get()
                       .uri(anyString())
+                      .header(anyString(), anyString())
                       .retrieve()
                       .toEntity(WebClientResponse.class)
                       .block())

@@ -22,6 +22,7 @@ public class WebClientService {
         final ResponseEntity<WebClientResponse> response =
             webClient.get()
                      .uri("http://localhost:1234")
+                     .header("a", "a")
                      .retrieve()
                      .toEntity(WebClientResponse.class)
                      .block();
