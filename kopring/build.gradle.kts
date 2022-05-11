@@ -17,6 +17,7 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
+    implementation("com.h2database:h2")
     testImplementation("com.h2database:h2")
 }
 
