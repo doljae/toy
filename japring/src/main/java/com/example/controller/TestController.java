@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.HappyPerson;
 import com.example.domain.Color;
 import com.example.dto.ResponseDto;
 
@@ -28,6 +28,11 @@ public class TestController {
         String collect = types.stream().map(Enum::name).collect(Collectors.joining(","));
 
         return ResponseDto.builder().build();
+    }
+
+    @GetMapping("/test/submodule")
+    public ResponseDto testWithSubmoduleClass() {
+        return ResponseDto.builder().body(new HappyPerson("teddy")).build();
     }
 
 //    @GetMapping("/test/{stringId}")
