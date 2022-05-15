@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import lombok.Getter;
 
@@ -99,5 +100,16 @@ public class Shop {
 
         final long retrievalTime = (System.nanoTime() - start) / 1_000_000;
         System.out.println("Price returned after " + retrievalTime + " msecs");
+    }
+
+    final Future<Double> futurePrice(String product) {
+        return CompletableFuture.supplyAsync(() -> new Shop("a").getPrice(product))
+                                .thenCombine( // 서로 결과에 영향을 주지 않는 두 비동기 메서드를 a, b를 실행 후 b의 결과를 a 스레드로 가져와서 결합
+                                              // .thenCompose()는 b 작업은 a 작업의 결과물이 필요할 경우 a 작업의 결과를 기다려 받아 b 작업을 수행할 때 사용함
+                                              // thenComposeAsync(), thenCombineAsync()도 있긴한데 굳이 다른 스레드에서 context switching 시킬 필요 없으면 안 쓰는게 좋음, 운 나쁘면 새 스레드 사용을 위해 대기해야함
+                                              CompletableFuture.supplyAsync(
+                                                  () -> new Shop("b").getPrice(product)),
+                                              (a, b) -> a * b)
+                                .orTimeout(1000L, TimeUnit.MILLISECONDS); // 이 작업에 대해서 timeout 설정
     }
 }
