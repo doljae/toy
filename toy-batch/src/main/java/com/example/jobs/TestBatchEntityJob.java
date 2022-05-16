@@ -12,6 +12,7 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.step.skip.AlwaysSkipItemSkipPolicy;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -91,7 +92,10 @@ public class TestBatchEntityJob {
     @Bean
     @StepScope
     public ItemWriter testWriter() {
-        return employee -> log.info("item writer success = {}", employee);
+        // log.info("item writer success = {}", employee);
+        final JpaItemWriter<Employee> jpaItemWriter = new JpaItemWriter<>();
+        jpaItemWriter.setEntityManagerFactory(entityManagerFactory);
+        return jpaItemWriter;
     }
 
 }
