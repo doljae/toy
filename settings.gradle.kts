@@ -1,4 +1,3 @@
 rootProject.name = "toy"
 
-include("japring","kopring")
-include("toy-core")
+include("japring", "kopring", "toy-core", "toy-batch")
