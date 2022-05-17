@@ -45,6 +45,7 @@ class WebClientServiceTest {
         assertEquals(HttpStatus.OK, response.httpStatus());
     }
 
+    @Disabled
     @Test
     void test2() {
         when(webClientBuilder.build()).thenReturn(webClient);
