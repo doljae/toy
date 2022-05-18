@@ -3,6 +3,8 @@ package com.example;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.jpmml.evaluator.Evaluator;
+import org.jpmml.evaluator.LoadingModelEvaluatorBuilder;
 import org.springframework.util.StringUtils;
 
 import com.example.domain.Cat;
