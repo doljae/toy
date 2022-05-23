@@ -3,13 +3,7 @@ package com.example;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.jpmml.evaluator.Evaluator;
-import org.jpmml.evaluator.LoadingModelEvaluatorBuilder;
 import org.springframework.util.StringUtils;
-
-import com.example.domain.Cat;
-import com.example.domain.Dog;
-import com.example.domain.Pet;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

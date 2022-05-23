@@ -3,6 +3,8 @@ package com.example.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +35,11 @@ public class TestController {
     @GetMapping("/test/submodule")
     public ResponseDto testWithSubmoduleClass() {
         return ResponseDto.builder().body(new HappyPerson("teddy")).build();
+    }
+
+    @GetMapping("/test/unauthorized")
+    public ResponseEntity<HappyPerson> testUnauthorized() {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new HappyPerson("teddy"));
     }
 
 //    @GetMapping("/test/{stringId}")
