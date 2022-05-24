@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.example.dto.WebClientResponse;
+
 @ExtendWith(MockitoExtension.class)
 class WebClientServiceTest {
 

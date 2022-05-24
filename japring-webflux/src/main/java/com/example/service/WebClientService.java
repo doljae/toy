@@ -21,7 +21,7 @@ public class WebClientService {
 
         final ResponseEntity<WebClientResponse> response =
             webClient.get()
-                     .uri("http://localhost:1234")
+                     .uri("http://localhost:12345")
                      .header("a", "a")
                      .retrieve()
                      .toEntity(WebClientResponse.class)
@@ -34,7 +34,7 @@ public class WebClientService {
 
         final ResponseEntity<WebClientResponse> response =
             webClientBuilder.build().get()
-                            .uri("http://localhost:1234")
+                            .uri("http://localhost:12345")
                             .retrieve()
                             .onStatus(HttpStatus::is4xxClientError,
                                       clientResponse -> Mono.justOrEmpty(new RuntimeException()))
