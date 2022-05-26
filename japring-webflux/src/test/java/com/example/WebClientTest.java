@@ -4,6 +4,7 @@ import static java.util.function.Predicate.not;
 
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -62,14 +63,7 @@ class WebClientTest {
                                                           .toEntity(
                                                               HappyPerson.class);
 
-//        mono.doOnError(CustomException.class, exception -> {
-//            System.out.println("works!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-//        });
-//        mono.doOnSuccess(entity -> {
-//            System.out.println(entity.getBody().getName());
-//        });
-        Thread.sleep(3000L);
-        System.out.println(mono.block().getBody().getName());
+        Assertions.assertThrows(CustomException.class, mono::block);
     }
 
     private static Predicate<HttpStatus> unauthorized = httpStatus -> httpStatus == HttpStatus.UNAUTHORIZED;

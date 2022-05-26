@@ -6,6 +6,7 @@ import org.reactivestreams.Subscription;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 class SwitchIfEmptyTest {
     @Test
@@ -47,5 +48,21 @@ class SwitchIfEmptyTest {
     static Mono<Integer> switchIfEmpty(int value) {
         System.err.println(".switchIfEmpty");
         return Mono.just(value);
+    }
+
+    @Test
+    void test2() throws InterruptedException {
+        final Flux<Integer> flux = Flux.just(1, 2, 3, 4, 5)
+                                       .map(value -> {
+                                           try {
+                                               Thread.sleep(1000L);
+                                           } catch (InterruptedException e) {
+                                               throw new RuntimeException(e);
+                                           }
+                                           return value;
+                                       }).subscribeOn(Schedulers.boundedElastic());
+
+        flux.subscribe(System.err::println);
+        Thread.sleep(6000L);
     }
 }
