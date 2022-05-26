@@ -30,18 +30,6 @@ class WebClientTest {
     void healthCheck() {
         webTestClient.get().uri("/test/unauthorized")
                      .exchange().expectStatus().isUnauthorized();
-//                                                               .retrieve()
-//                                                           .onStatus(unauthorized,
-//                                                                     clientResponse -> Mono.error(
-//                                                                         new CustomException(
-//                                                                             "unauthorized")))
-//                                                           .onStatus(
-//                                                               not(HttpStatus::is2xxSuccessful),
-//                                                               clientResponse -> Mono.error(
-//                                                                   new CustomException(
-//                                                                       "not 2XX")))
-//                                                               .toEntity(ResponseDto.class).block());
-
     }
 
     @Test
