@@ -46,7 +46,10 @@ public class WebClientAdaptor {
                      .onStatus(HttpStatus::is5xxServerError, clientResponse ->
                          clientResponse.createException().flatMap(Mono::error))
                      .toEntity(WebClientResponse.class)
-                     .block();
+                     .flux()
+                     .toStream()
+                     .findFirst()
+                     .orElse(ResponseEntity.internalServerError().build());
 
         log.info(Objects.requireNonNull(Objects.requireNonNull(response).getBody()).response());
     }
