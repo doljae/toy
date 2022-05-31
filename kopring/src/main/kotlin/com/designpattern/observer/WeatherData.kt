@@ -18,7 +18,8 @@ class WeatherData(
 
     override fun notifyObservers() {
         for (observer in observers) {
-            observer.update(temperature, humidify, pressure)
+            // observer.update(temperature, humidify, pressure)
+            observer.update()
         }
     }
 
