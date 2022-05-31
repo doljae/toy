@@ -1,10 +1,10 @@
 package com.designpattern.observer
 
 class CurrentConditionDisplay(
-    var temperature: Float = 0F,
-    var humidity: Float = 0F,
     var weatherData: WeatherData
 ) : DisplayElement, Observer {
+    var temperature: Float = 0F
+    var humidity: Float = 0F
 
     init {
         this.weatherData = weatherData

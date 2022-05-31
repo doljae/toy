@@ -1,10 +1,10 @@
 package com.designpattern.observer
 
 class WeatherData(
-    var temperature: Float,
-    var humidify: Float,
-    var pressure: Float,
-    val observers: MutableList<Observer>
+    var temperature: Float = 0F,
+    var humidify: Float = 0F,
+    var pressure: Float = 0F,
+    val observers: MutableList<Observer> = mutableListOf()
 ) : Subject {
 
 
