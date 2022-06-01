@@ -11,19 +11,53 @@ import lombok.extern.slf4j.Slf4j;
 public class TestUUID {
 
     public static void main(String[] args) {
-        Set<UUID> set = new HashSet<>();
-        for (int i = 0; i < 100000000; i++) {
-            final String testString = Integer.toString(i);
-            final UUID uuid = UUID.nameUUIDFromBytes(testString.getBytes(StandardCharsets.UTF_8));
-//            log.info(String.valueOf(uuid.variant()));
-//            log.info(String.valueOf(uuid.version()));
-            log.info(Integer.toString(i) + " " + uuid.toString());
-            if (set.contains(uuid)) {
-                log.info(testString);
-                break;
-            }
-            set.add(uuid);
-        }
+//        Set<UUID> set = new HashSet<>();
+//        for (int i = 0; i < 100000000; i++) {
+//            final String testString = Integer.toString(i);
+//            final UUID uuid = UUID.nameUUIDFromBytes(testString.getBytes(StandardCharsets.UTF_8));
+////            log.info(String.valueOf(uuid.variant()));
+////            log.info(String.valueOf(uuid.version()));
+//            log.info(Integer.toString(i) + " " + uuid.toString());
+//            if (set.contains(uuid)) {
+//                log.info(testString);
+//                break;
+//            }
+//            set.add(uuid);
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println(UUID.randomUUID().toString());
+//        System.out.println();
+//        System.out.println(UUID.nameUUIDFromBytes("apple".getBytes(StandardCharsets.UTF_8)));
+//        System.out.println(UUID.nameUUIDFromBytes("apple".getBytes(StandardCharsets.UTF_8)));
+//        System.out.println(UUID.nameUUIDFromBytes("apple".getBytes(StandardCharsets.UTF_8)));
+//        System.out.println(UUID.nameUUIDFromBytes("apple".getBytes(StandardCharsets.UTF_8)));
+//        System.out.println(UUID.nameUUIDFromBytes("apple".getBytes(StandardCharsets.UTF_8)));
+//        System.out.println(UUID.nameUUIDFromBytes("apple".getBytes(StandardCharsets.UTF_8)));
+//        System.out.println(UUID.nameUUIDFromBytes("apple".getBytes(StandardCharsets.UTF_8)));
+//        System.out.println(UUID.nameUUIDFromBytes("apple".getBytes(StandardCharsets.UTF_8)));
+//        System.out.println(UUID.nameUUIDFromBytes("apple".getBytes(StandardCharsets.UTF_8)));
+//        System.out.println();
+//        System.out.println(new UUID(234L, 234L));
+//        System.out.println(new UUID(234L, 234L));
+//        System.out.println(new UUID(15L, 15L));
+//        System.out.println(new UUID(234L, 234L));
+//        System.out.println(new UUID(234L, 234L));
+//        System.out.println(new UUID(234L, 234L));
+//        System.out.println(new UUID(234L, 234L));
+//        System.out.println(new UUID(234L, 234L));
+//        System.out.println(new UUID(234L, 234L));
+
+    }
 //        7d6a60e9-0eae-32fb-94e6-163f989b156e
 //        7d6a60e9-0eae-32fb-94e6-163f989b156e
 //        System.out.println(
@@ -63,5 +97,5 @@ public class TestUUID {
 //        String a = "123456";
 //        System.out.println(a.getBytes(StandardCharsets.UTF_8).length);
 //    }
-    }
 }
+
