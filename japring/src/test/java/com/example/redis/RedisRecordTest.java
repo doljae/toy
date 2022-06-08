@@ -67,6 +67,6 @@ class RedisRecordTest {
 
         // Caused by: com.fasterxml.jackson.databind.exc.InvalidTypeIdException: Could not resolve subtype of [simple type, class java.lang.Object]: missing type id property '@class'
         // at [Source: (byte[])"{"id":1,"name":"doljae","createdAt":"2022-06-08T21:40:36.057138+09:00"}"; line: 1, column: 72]
-        final Object deserialized = redisObjectTemplate.opsForValue().get("key");
+        final RequestRecord deserialized = redisRecordTemplate.opsForValue().get("key");
     }
 }
