@@ -34,7 +34,8 @@ public class RedisConfiguration {
         final RedisTemplate<String, ?> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
 
-        final GenericJackson2JsonRedisSerializer jackson2JsonRedisSerializer = genericJackson2JsonRedisSerializer();
+        final GenericJackson2JsonRedisSerializer jackson2JsonRedisSerializer =
+            genericJackson2JsonRedisSerializer();
 
         template.setKeySerializer(stringRedisSerializer);
         template.setValueSerializer(jackson2JsonRedisSerializer);
@@ -51,7 +52,8 @@ public class RedisConfiguration {
             .registerModule(new Jdk8Module())
             .registerModule(new JavaTimeModule())
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
 
         mapper.activateDefaultTyping(mapper.getPolymorphicTypeValidator(),
                                      DefaultTyping.NON_FINAL,

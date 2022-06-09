@@ -1,0 +1,14 @@
+package com.example.redis;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class RequestDto2 {
+
+    private Long id;
+    private String name;
+}
