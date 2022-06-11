@@ -1,12 +1,15 @@
 package com.designpattern.factory
 
-class PizzaStore(val factory: SimplePizzaFactory) {
+abstract class PizzaStore {
 
     fun orderPizza(type: String): Pizza? {
-        val pizza = factory.createPizza(type)
+
+        val pizza = createPizza(type)
 
         // do something
 
         return pizza
     }
+
+    protected abstract fun createPizza(type: String): Pizza?
 }
