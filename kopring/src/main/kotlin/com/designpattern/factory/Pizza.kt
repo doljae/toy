@@ -25,6 +25,10 @@ abstract class Pizza(
     fun box() {
         println("상자에 피자를 담기")
     }
+
+    override fun toString(): String {
+        return "Pizza(name='$name', dough='$dough', sauce='$sauce', toppings=$toppings)"
+    }
 }
 
 class CheesePizza : Pizza("치즈 피자", "치즈 피자 도우", "토마토 소스") {
