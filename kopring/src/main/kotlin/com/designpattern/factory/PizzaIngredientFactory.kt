@@ -10,26 +10,58 @@ interface PizzaIngredientFactory {
     fun createClam(): Clams
 }
 
-class Dough {
+open class Dough {
 
 }
 
-class Sauce {
+class ThinCrustDough : Dough() {
 
 }
 
-class Cheese {
+open class Sauce {
 
 }
 
-class Veggies {
+class MarinaraSauce : Sauce() {
 
 }
 
-class Pepperoni {
+open class Cheese {
 
 }
 
-class Clams {
+class ReggianoCheese : Cheese() {
+
+}
+
+open class Veggies {
+
+}
+
+class Garlic : Veggies() {
+
+}
+
+class Onion : Veggies() {
+
+}
+
+class Mushroom : Veggies() {
+
+}
+
+open class Pepperoni {
+
+}
+
+class SlicedPepperoni : Pepperoni() {
+
+}
+
+open class Clams {
+
+}
+
+class FreshClams : Clams() {
 
 }
