@@ -1,13 +1,13 @@
 package com.designpattern.factory
 
 abstract class Pizza {
-    lateinit var name: String
-    lateinit var dough: Dough
-    lateinit var sauce: Sauce
+    var name: String? = null
+    var dough: Dough? = null
+    var sauce: Sauce? = null
     var veggies: MutableList<Veggies> = mutableListOf()
-    lateinit var cheese: Cheese
-    lateinit var pepperoni: Pepperoni
-    lateinit var clams: Clams
+    var cheese: Cheese? = null
+    var pepperoni: Pepperoni? = null
+    var clams: Clams? = null
 
     abstract fun prepare()
 
