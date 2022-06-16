@@ -15,6 +15,8 @@ object singletonV2 {
 // private 생성자를 기본 생성자로 지정
 class Singleton private constructor() {
 
+    val name = "doljae"
+
     // 하나의 클래스에서 공통으로 사용하는 단 하나의 객체인 companion object를 사용
     companion object {
         // 필드 변수를 volitile로 선언해 이 값은 무조건 메모리에서 읽어오도록 설정
@@ -44,5 +46,14 @@ fun main() {
         println("동일성 비교 true")
     }
 
-    val javaStyleSingleton = Singleton.getInstance()
+    val javaStyleSingleton1 = Singleton.getInstance()
+    val javaStyleSingleton2 = Singleton.getInstance()
+
+    if (javaStyleSingleton1.name == singletonV1_2.name) {
+        println("동등성 비교 true")
+    }
+
+    if (javaStyleSingleton2.name === singletonV1_2.name) {
+        println("동일성 비교 true")
+    }
 }
