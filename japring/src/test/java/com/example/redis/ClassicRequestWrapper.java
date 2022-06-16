@@ -1,5 +1,6 @@
 package com.example.redis;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
@@ -10,8 +11,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestWrapper {
+public class ClassicRequestWrapper {
 
     @JsonTypeInfo(use = Id.CLASS)
-    public RequestRecord wrapped;
+    @JsonSubTypes({
+        @JsonSubTypes.Type(RequestDto.class),
+        @JsonSubTypes.Type(RequestRecord.class)
+    })
+    public Object wrapped;
 }

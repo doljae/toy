@@ -8,8 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 @SpringBootTest
 class RedisRecordTest {
@@ -27,7 +33,7 @@ class RedisRecordTest {
     @Autowired
     private RedisTemplate<String, Object> redisObjectTemplate;
     @Autowired
-    private RedisTemplate<String, RequestWrapper> redisWrapperTemplate;
+    private RedisTemplate<String, ClassicRequestWrapper> redisWrapperTemplate;
     @Autowired
     private RedisTemplate<String, RequestFinalDto> redisFinalDtoTemplate;
     @Autowired
@@ -104,25 +110,25 @@ class RedisRecordTest {
     @Test
     void test5() {
         final RequestDto dto = new RequestDto(1L, "doljae", OffsetDateTime.now());
-        final RequestWrapper wrapper = new RequestWrapper(dto);
+        final ClassicRequestWrapper wrapper = new ClassicRequestWrapper(dto);
 
         redisWrapperTemplate.opsForValue().set("key", wrapper);
 
-        final RequestWrapper requestWrapper = redisWrapperTemplate.opsForValue().get("key");
+        final ClassicRequestWrapper classicRequestWrapper = redisWrapperTemplate.opsForValue().get("key");
 
     }
 
     @Test
     void test6() throws JsonProcessingException {
         final RequestDto dto = new RequestDto(1L, "doljae", OffsetDateTime.now());
-        final RequestWrapper wrapper = new RequestWrapper(dto);
+        final ClassicRequestWrapper wrapper = new ClassicRequestWrapper(dto);
 
         redisWrapperTemplate.opsForValue().set("key", wrapper);
 
         final String key = redisStringTemplate.opsForValue().get("key");
-        final RequestWrapper requestWrapper = mapper.readValue(key, RequestWrapper.class);
-        System.out.println(requestWrapper);
-        final Object wrapped = requestWrapper.getWrapped();
+        final ClassicRequestWrapper classicRequestWrapper = mapper.readValue(key, ClassicRequestWrapper.class);
+        System.out.println(classicRequestWrapper);
+        final Object wrapped = classicRequestWrapper.getWrapped();
         if (wrapped instanceof RequestDto result) {
             System.out.println("class");
             System.out.println(result);
@@ -137,14 +143,14 @@ class RedisRecordTest {
     @Test
     void test7() throws JsonProcessingException {
         final RequestDto2 dto = new RequestDto2(1L, "doljae");
-        final RequestWrapper wrapper = new RequestWrapper(dto);
+        final ClassicRequestWrapper wrapper = new ClassicRequestWrapper(dto);
 
         redisWrapperTemplate.opsForValue().set("key", wrapper);
 
-        final RequestWrapper requestWrapper = redisWrapperTemplate.opsForValue().get("key");
-        System.out.println(requestWrapper);
-        assert requestWrapper != null;
-        final Object wrapped = requestWrapper.getWrapped();
+        final ClassicRequestWrapper classicRequestWrapper = redisWrapperTemplate.opsForValue().get("key");
+        System.out.println(classicRequestWrapper);
+        assert classicRequestWrapper != null;
+        final Object wrapped = classicRequestWrapper.getWrapped();
         if (wrapped instanceof RequestDto2 result) {
             System.out.println("class");
             System.out.println(result);
@@ -159,14 +165,14 @@ class RedisRecordTest {
     @Test
     void test8() throws JsonProcessingException {
         final RequestRecord2 dto = new RequestRecord2(1L, "doljae");
-        final RequestWrapper wrapper = new RequestWrapper(dto);
+        final ClassicRequestWrapper wrapper = new ClassicRequestWrapper(dto);
 
         redisWrapperTemplate.opsForValue().set("key", wrapper);
 
-        final RequestWrapper requestWrapper = redisWrapperTemplate.opsForValue().get("key");
-        System.out.println(requestWrapper);
-        assert requestWrapper != null;
-        final Object wrapped = requestWrapper.getWrapped();
+        final ClassicRequestWrapper classicRequestWrapper = redisWrapperTemplate.opsForValue().get("key");
+        System.out.println(classicRequestWrapper);
+        assert classicRequestWrapper != null;
+        final Object wrapped = classicRequestWrapper.getWrapped();
         if (wrapped instanceof RequestDto2 result) {
             System.out.println("class");
             System.out.println(result);
@@ -193,5 +199,37 @@ class RedisRecordTest {
 
         System.out.println(key1);
 //        System.out.println(key2);
+    }
+
+    @Test
+    void test10() throws JsonProcessingException {
+        final RequestRecord2 record = new RequestRecord2(1L, "doljae");
+
+        redisRecordTemplate2.opsForValue().set("key2", record);
+
+        final RequestRecord2 key2 = redisRecordTemplate2.opsForValue().get("key2");
+
+        System.out.println(key2);
+    }
+
+    @Test
+    void test11() throws JsonProcessingException {
+        final RequestRecord targetClass = new RequestRecord(1L, "doljae", OffsetDateTime.now());
+        final RequestWrapper wrapperClass = new RequestWrapper(targetClass);
+
+        final ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new ParameterNamesModule(JsonCreator.Mode.DEFAULT))
+              .registerModule(new Jdk8Module())
+              .registerModule(new JavaTimeModule())
+              .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+              .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+              .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
+
+        final String serialized = mapper.writeValueAsString(wrapperClass);
+        System.out.println(serialized);
+
+        final RequestWrapper requestWrapper = mapper.readValue(serialized, RequestWrapper.class);
+        final RequestRecord wrapped = requestWrapper.getWrapped();
+        System.out.println(wrapped);
     }
 }

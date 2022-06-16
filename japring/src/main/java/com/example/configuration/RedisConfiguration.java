@@ -56,8 +56,8 @@ public class RedisConfiguration {
             .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
 
         mapper.activateDefaultTyping(mapper.getPolymorphicTypeValidator(),
-                                     DefaultTyping.NON_FINAL,
-                                     As.PROPERTY);
+                                     DefaultTyping.EVERYTHING,
+                                     As.WRAPPER_ARRAY);
 
         return new GenericJackson2JsonRedisSerializer(mapper);
     }
