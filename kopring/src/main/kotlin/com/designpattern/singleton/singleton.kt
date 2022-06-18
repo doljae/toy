@@ -31,6 +31,7 @@ class Singleton private constructor() {
             instance ?: Singleton().also { instance = it }
         }
     }
+
 }
 
 

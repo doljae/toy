@@ -12,6 +12,7 @@ public class ClassicSort {
     private static final List<Integer> testData = new ArrayList<>();
     // -Xms2048m -Xms2048m -XX:+PrintCompilation
     // -Xms2048m -Xms2048m -verbose:gc
+    // -XX:+LogCompilation -XX:+UnlockDiagnosticVMOptions
 
     public static void main(String[] args) {
         final Random random = new Random();
