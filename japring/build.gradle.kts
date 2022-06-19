@@ -29,3 +29,7 @@ dependencies {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.clean {
+    delete(rootProject.buildDir)
+}
