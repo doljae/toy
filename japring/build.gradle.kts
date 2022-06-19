@@ -2,6 +2,8 @@ plugins {
     id("org.springframework.boot")
 }
 
+val queryDsl = dependencyManagement.importedProperties["querydsl.version"]
+
 dependencies {
     implementation(project(":toy-core"))
 
@@ -19,6 +21,9 @@ dependencies {
     implementation("com.h2database:h2")
     testImplementation("com.h2database:h2")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+    implementation("com.querydsl:querydsl-jpa")
+    implementation("com.querydsl:querydsl-apt:$queryDsl:jpa")
 }
 
 tasks.withType<Test> {
