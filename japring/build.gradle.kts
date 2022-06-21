@@ -23,7 +23,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
     implementation("com.querydsl:querydsl-jpa")
-    implementation("com.querydsl:querydsl-apt:$queryDsl:jpa")
+    annotationProcessor("com.querydsl:querydsl-apt:$queryDsl:jpa")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
 }
 
 tasks.withType<Test> {
