@@ -2,6 +2,7 @@ package com.tuning;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -11,6 +12,8 @@ public class AgeCache {
     private final Lock readLock = readWriteLock.readLock();
     private final Lock writeLock = readWriteLock.writeLock();
     private Map<String, Integer> ageCache = new HashMap<>();
+
+    private final Semaphore poolPermits = new Semaphore(2, true);
 
     public Integer getAge(String name) {
         readLock.lock();
