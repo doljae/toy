@@ -21,7 +21,7 @@ public class AddEmployeeData implements ApplicationListener<ApplicationStartedEv
 
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             final Employee employee = new Employee("employee" + i, OffsetDateTime.now());
             employeeRepository.save(employee);
         }
