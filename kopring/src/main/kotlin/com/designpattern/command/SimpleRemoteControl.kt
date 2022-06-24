@@ -18,9 +18,9 @@ fun main() {
     remote.buttonWasPressed()
 
     val garageDoor = GarageDoor()
-    val garageDoorOpenCommand = GarageDoorOpenCommand()
-    garageDoorOpenCommand.garageDoor = garageDoor
+    val garageDoorUpCommand = GarageDoorUpCommand()
+    garageDoorUpCommand.garageDoor = garageDoor
 
-    remote.slot = garageDoorOpenCommand
+    remote.slot = garageDoorUpCommand
     remote.buttonWasPressed()
 }

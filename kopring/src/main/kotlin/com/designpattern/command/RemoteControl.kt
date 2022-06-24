@@ -24,5 +24,27 @@ class RemoteControl() {
         offCommands[slot].execute()
     }
 
-    override fun toString() = "리모컨, $onCommands, $offCommands"
+    override fun toString() = "리모컨, ${onCommands.joinToString()}, ${offCommands.joinToString()}"
+}
+
+fun main() {
+    val remoteControl = RemoteControl()
+
+    val lightOnCommand = LightOnCommand(Light())
+    val lightOffCommand = LightOffCommand(Light())
+
+    val garageDoorUpCommand = GarageDoorUpCommand()
+    garageDoorUpCommand.garageDoor = GarageDoor()
+    val garageDoorDownCommand = GarageDoorDownCommand()
+    garageDoorDownCommand.garageDoor = GarageDoor()
+
+    remoteControl.setCommand(0, lightOnCommand, lightOffCommand)
+    remoteControl.setCommand(1, garageDoorUpCommand, garageDoorDownCommand)
+
+    println(remoteControl)
+
+    remoteControl.onButtonWasPushed(0)
+    remoteControl.offButtonWasPushed(0)
+    remoteControl.onButtonWasPushed(1)
+    remoteControl.offButtonWasPushed(1)
 }
