@@ -16,4 +16,11 @@ fun main() {
 
     remote.slot = lightOnCommand
     remote.buttonWasPressed()
+
+    val garageDoor = GarageDoor()
+    val garageDoorOpenCommand = GarageDoorOpenCommand()
+    garageDoorOpenCommand.garageDoor = garageDoor
+
+    remote.slot = garageDoorOpenCommand
+    remote.buttonWasPressed()
 }
