@@ -28,6 +28,28 @@ class RemoteControl() {
 }
 
 fun main() {
+//    val remoteControl = RemoteControl()
+//
+//    val lightOnCommand = LightOnCommand(Light())
+//    val lightOffCommand = LightOffCommand(Light())
+//
+//    val garageDoorUpCommand = GarageDoorUpCommand()
+//    garageDoorUpCommand.garageDoor = GarageDoor()
+//    val garageDoorDownCommand = GarageDoorDownCommand()
+//    garageDoorDownCommand.garageDoor = GarageDoor()
+//
+//    remoteControl.setCommand(0, lightOnCommand, lightOffCommand)
+//    remoteControl.setCommand(1, garageDoorUpCommand, garageDoorDownCommand)
+//
+//    println(remoteControl)
+//
+//    remoteControl.onButtonWasPushed(0)
+//    remoteControl.offButtonWasPushed(0)
+//    remoteControl.onButtonWasPushed(1)
+//    remoteControl.offButtonWasPushed(1)
+
+    println("==============================================")
+
     val remoteControl = RemoteControl()
 
     val lightOnCommand = LightOnCommand(Light())
@@ -38,13 +60,12 @@ fun main() {
     val garageDoorDownCommand = GarageDoorDownCommand()
     garageDoorDownCommand.garageDoor = GarageDoor()
 
-    remoteControl.setCommand(0, lightOnCommand, lightOffCommand)
-    remoteControl.setCommand(1, garageDoorUpCommand, garageDoorDownCommand)
+    val macroOnCommand = MacroCommand(mutableListOf(lightOnCommand, garageDoorUpCommand))
+    val macroOffCommand = MacroCommand(mutableListOf(lightOffCommand, garageDoorDownCommand))
 
-    println(remoteControl)
+    remoteControl.setCommand(0, macroOnCommand, macroOffCommand)
 
     remoteControl.onButtonWasPushed(0)
     remoteControl.offButtonWasPushed(0)
-    remoteControl.onButtonWasPushed(1)
-    remoteControl.offButtonWasPushed(1)
+
 }
