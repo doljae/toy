@@ -1,0 +1,31 @@
+server:
+  port: 1234
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  show-login-endpoint: true
+  swagger-ui:
+    filter: true
+    operationsSorter: method
+    tagsSorter: alpha
+    defaultModelsExpandDepth: 0
+    docExpansion: none
+
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
+
+logging:
+  level:
+    com.example.feign.TestFeignClient: DEBUG
+    org.springframework.transaction.interceptor: TRACE
