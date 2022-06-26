@@ -29,3 +29,7 @@ logging:
   level:
     com.example.feign.TestFeignClient: DEBUG
     org.springframework.transaction.interceptor: TRACE
+    org.springframework.jdbc.datasource.DataSourceTransactionManager: DEBUG
+    org.hibernate.resource.transaction: DEBUG
+    org.springframework.orm.jpa.JpaTransactionManager: DEBUG
+    logging.level.org.hibernate.SQL: DEBUG
