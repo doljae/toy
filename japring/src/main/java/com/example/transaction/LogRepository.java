@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class LogRepository {
 
     private final EntityManager entityManager;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void save(Log logMessage) {
         log.info("log 저장");
         entityManager.persist(logMessage);
