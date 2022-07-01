@@ -10,7 +10,6 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.step.skip.AlwaysSkipItemSkipPolicy;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JpaCursorItemReader;
 import org.springframework.batch.item.database.JpaItemWriter;
@@ -36,10 +35,10 @@ public class JpaCursorBatchJob {
     private static final int CHUNK_SIZE = 10;
 
     public JpaCursorBatchJob(
-        JobBuilderFactory jobBuilderFactory,
-        StepBuilderFactory stepBuilderFactory,
-        EntityManagerFactory entityManagerFactory,
-        ExceptionService exceptionService) {
+            JobBuilderFactory jobBuilderFactory,
+            StepBuilderFactory stepBuilderFactory,
+            EntityManagerFactory entityManagerFactory,
+            ExceptionService exceptionService) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.stepBuilderFactory = stepBuilderFactory;
         this.entityManagerFactory = entityManagerFactory;
@@ -72,15 +71,15 @@ public class JpaCursorBatchJob {
      currentItemCount(c) -> 읽어온 row중 c번째 row부터 읽겠다 (시작은 1)
      */
     @Bean
-    @StepScope // ? proxy pattern...? 이게 없으면 동작함, 있으면 동작 안함...?
-    public ItemReader<Employee> testEntityReader() {
+    @StepScope // ? proxy pattern...? 이게 없으면 동작함, 있으면 동작 안함... 왜?...
+    public JpaCursorItemReader<Employee> testEntityReader() {
         return new JpaCursorItemReaderBuilder<Employee>()
-            .name("employReader")
-            .entityManagerFactory(entityManagerFactory)
-            .queryString("SELECT e FROM Employee e")
+                .name("employReader")
+                .entityManagerFactory(entityManagerFactory)
+                .queryString("SELECT e FROM Employee e")
 //            .maxItemCount(10)
 //            .currentItemCount(3)
-            .build();
+                .build();
     }
 
     @Bean
@@ -96,7 +95,7 @@ public class JpaCursorBatchJob {
 
     @Bean
     @StepScope
-    public ItemWriter testWriter() {
+    public ItemWriter<Employee> testWriter() {
         final JpaItemWriter<Employee> jpaItemWriter = new JpaItemWriter<>();
         jpaItemWriter.setEntityManagerFactory(entityManagerFactory);
         return jpaItemWriter;
