@@ -6,7 +6,7 @@ abstract class CaffeineBeverate {
         boilWater()
         brew()
         pourIncCup()
-        if (customerWantsCondiments()) addCondiments()
+        if (customerWantsCondiments()) addCondiments() else println("추가하지 않습니다")
     }
 
     open fun customerWantsCondiments() = true

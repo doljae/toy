@@ -9,4 +9,7 @@ fun main() {
 
     val coffee = Coffee()
     coffee.prepareRecipe()
+
+    val coffeeWIthHook = CoffeeWIthHook()
+    coffeeWIthHook.prepareRecipe()
 }
