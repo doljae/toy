@@ -6,9 +6,10 @@ abstract class CaffeineBeverate {
         boilWater()
         brew()
         pourIncCup()
-        addCondiments()
+        if (customerWantsCondiments()) addCondiments()
     }
 
+    open fun customerWantsCondiments() = true
     abstract fun brew()
     abstract fun addCondiments()
     fun boilWater() {
