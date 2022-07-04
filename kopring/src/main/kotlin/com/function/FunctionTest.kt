@@ -21,5 +21,31 @@ val isPersonSick = person.run {
     isSick()
 }
 
+// with은 잘 안씀
+val isPersonSick2 = with(person) {
+    temperature = 38f
+    isSick()
+}
 
+val nullPerson = null
+val isReserved = nullPerson?.let(::reserveMovie)
 
+fun reserveMovie(person: Person) {
+    println("reserve movie")
+}
+
+var number = 3
+fun getAndIncreaseNumber() = number.also { number++ }
+
+// 객체에 대해서는 적합하지 않음
+var person2 = Person("doljae", 30, 36f)
+fun getAndIncreaseNumber2() = person2.also { person2.age = it.age + 1 }
+fun getAndIncreaseNumberWithCopy() = person2.also { person2 = person2.copy(age = it.age + 1) }
+
+fun main() {
+    println("first number ${getAndIncreaseNumber()}")
+    println("second number ${getAndIncreaseNumber()}")
+
+    println("first number ${getAndIncreaseNumber2()}")
+    println("second number ${getAndIncreaseNumber2()}")
+}
