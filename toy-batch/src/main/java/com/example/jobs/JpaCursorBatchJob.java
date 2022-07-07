@@ -8,16 +8,16 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.core.step.skip.AlwaysSkipItemSkipPolicy;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.database.JpaCursorItemReader;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.example.configuration.CheckProxyUtil;
 import com.example.domain.Employee;
 import com.example.service.ExceptionService;
 
@@ -32,6 +32,7 @@ public class JpaCursorBatchJob {
     private final StepBuilderFactory stepBuilderFactory;
     private final EntityManagerFactory entityManagerFactory;
     private final ExceptionService exceptionService;
+    private final CheckProxyUtil checkProxyUtil;
     private static final int CHUNK_SIZE = 10;
 
     public JpaCursorBatchJob(
@@ -43,6 +44,7 @@ public class JpaCursorBatchJob {
         this.stepBuilderFactory = stepBuilderFactory;
         this.entityManagerFactory = entityManagerFactory;
         this.exceptionService = exceptionService;
+        this.checkProxyUtil = new CheckProxyUtil();
     }
 
     @Bean
@@ -61,8 +63,8 @@ public class JpaCursorBatchJob {
                                  .reader(testEntityReader())
                                  .processor(testProcessor())
                                  .writer(testWriter())
-                                 .faultTolerant()
-                                 .skipPolicy(new AlwaysSkipItemSkipPolicy())
+//                                 .faultTolerant()
+//                                 .skipPolicy(new AlwaysSkipItemSkipPolicy())
                                  .build();
     }
 
@@ -72,7 +74,7 @@ public class JpaCursorBatchJob {
      */
     @Bean
     @StepScope // ? proxy pattern...? 이게 없으면 동작함, 있으면 동작 안함... 왜?...
-    public JpaCursorItemReader<Employee> testEntityReader() {
+    public ItemReader<Employee> testEntityReader() {
         return new JpaCursorItemReaderBuilder<Employee>()
                 .name("employReader")
                 .entityManagerFactory(entityManagerFactory)
@@ -88,7 +90,6 @@ public class JpaCursorBatchJob {
         return employee -> {
             log.info("처리 중, {}", employee.getId());
             employee.setName(employee.getName() + "_new");
-            log.info("처리 완료, {}", employee.getId());
             return employee;
         };
     }
