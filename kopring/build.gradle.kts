@@ -20,6 +20,8 @@ dependencies {
 
     implementation("com.h2database:h2")
     testImplementation("com.h2database:h2")
+
+    implementation ("com.jaredrummler:ktsh:1.0.0")
 }
 
 tasks.withType<KotlinCompile> {
