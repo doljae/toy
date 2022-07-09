@@ -2,6 +2,8 @@ package com.example.jobs;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.springframework.aop.framework.AopProxyUtils;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -11,6 +13,10 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.item.NonTransientResourceException;
+import org.springframework.batch.item.ParseException;
+import org.springframework.batch.item.UnexpectedInputException;
+import org.springframework.batch.item.database.JpaCursorItemReader;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -73,15 +79,14 @@ public class JpaCursorBatchJob {
      currentItemCount(c) -> 읽어온 row중 c번째 row부터 읽겠다 (시작은 1)
      */
     @Bean
-    @StepScope // ? proxy pattern...? 이게 없으면 동작함, 있으면 동작 안함... 왜?...
-    public ItemReader<Employee> testEntityReader() {
+    @StepScope
+    public JpaCursorItemReader<Employee> testEntityReader() {
         return new JpaCursorItemReaderBuilder<Employee>()
                 .name("employReader")
                 .entityManagerFactory(entityManagerFactory)
                 .queryString("SELECT e FROM Employee e")
-//            .maxItemCount(10)
-//            .currentItemCount(3)
                 .build();
+        AopUtils
     }
 
     @Bean
