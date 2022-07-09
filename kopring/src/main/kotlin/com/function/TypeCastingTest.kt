@@ -28,9 +28,6 @@ fun main() {
 
     val something = mutableListOf(1, 2)
 
-    if (something is List<*>) {
-        something.
-    }
 }
 
 fun check(list: List<Any>) {
