@@ -47,7 +47,26 @@ fun printValues(values: Array<*>) {
     // values[0] = values[1]
 }
 
+// verbose
+fun <T> findFirst(fruits: List<Fruit>, ofClass: Class<T>): T {
+    val selected = fruits.filter { fruit -> ofClass.isInstance(fruit) }
+    if (selected.isEmpty()) {
+        throw RuntimeException()
+    }
+    return ofClass.cast(selected[0])
+}
 
+// use inline & reified
+// Class<T> 같은건 바이트 코드 컴파일 시 지워진다. 그래서 파라미터의 형태로 넘거야 내부 로직을 처리할 수 있는데...
+// inline을 이용해 컴파일 타임에 확정하고 reified를 이용해 클래스 타입 정보를 코드에서 사용한다
+// 즉 런타임에서 사라지는 클래스 정보를 사용할 수 있게 되어 메서드에서 타입 검사 같은걸 할 수 있음
+inline fun <reified T> findFirst(fruits: List<Fruit>): T {
+    val selected = fruits.filter { fruit -> fruit is T }
+    if (selected.isEmpty()) {
+        throw RuntimeException()
+    }
+    return selected[0] as T
+}
 
 fun main() {
     val arrayOf: List<Apple> = listOf(Apple())
