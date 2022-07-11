@@ -1,5 +1,6 @@
 package com.function
 
+// https://0391kjy.tistory.com/25?category=742907
 val numbers = mutableListOf("one", "two", "three", "four", "five")
 
 class Point(var x: Int, var y: Int)
@@ -46,4 +47,14 @@ fun main() {
     // 요렇게도 사용이 가능하다
     // ?를 이용한 safe call도 가능하기 때문에 with 보다 자주 사용된다.
     val widthV3 = point?.run { x * 0.5 }
+
+    // apply는 객체 초기화에 많이 사용한다
+    val person = Person("doljae").apply {
+        age = 30
+    }
+
+    // also는 객체를 건드리지 않고 추가 로직(로깅, 디버깅)할 때 사용한다
+    numbers.also {
+        println("새 항목을 추가하기 전 리스트 목록 : $it")
+    }.add("four")
 }
