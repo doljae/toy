@@ -30,4 +30,13 @@ fun main() {
     }
 
     // 진짜 리팩토링 버전
+    val showTemperature3 = false
+    val city3 = "Seoul"
+    val temperatureLazy by lazy { getTemperature(city3) }
+
+    if (showTemperature3 && temperatureLazy > 20) {
+        println("Warm")
+    } else {
+        println("Nothing to report")
+    }
 }
