@@ -2,12 +2,11 @@ import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 
 plugins {
     java
-    id("org.springframework.boot") version "2.6.8" apply false
+    id("org.springframework.boot") version "2.7.1" apply false
     id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false
-    kotlin("jvm") version "1.6.21" apply false
-    kotlin("plugin.spring") version "1.6.21" apply false
-    kotlin("plugin.jpa") version "1.6.21" apply false
 }
+
+extra["testcontainersVersion"] = "1.17.3"
 
 allprojects {
     group = "com.example"
@@ -45,19 +44,12 @@ subprojects {
 
         implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
         implementation(platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"))
+        implementation(platform("org.testcontainers:testcontainers-bom:${property("testcontainersVersion")}"))
 
         // lombok
         compileOnly("org.projectlombok:lombok")
         testCompileOnly("org.projectlombok:lombok")
         annotationProcessor("org.projectlombok:lombok")
         testAnnotationProcessor("org.projectlombok:lombok")
-
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-        implementation("io.kotest:kotest-runner-junit5:5.0.3")
-        implementation("io.kotest:kotest-assertions-core:5.0.3")
-        implementation("io.kotest:kotest-property:5.0.3")
-        implementation("org.springdoc:springdoc-openapi-ui:1.6.8")
-        implementation("io.reactivex.rxjava3:rxjava:3.1.4")
-        implementation("com.h2database:h2:2.1.212")
     }
 }

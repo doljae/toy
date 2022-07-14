@@ -86,7 +86,6 @@ public class JpaCursorBatchJob {
                 .entityManagerFactory(entityManagerFactory)
                 .queryString("SELECT e FROM Employee e")
                 .build();
-        AopUtils
     }
 
     @Bean

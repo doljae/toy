@@ -15,7 +15,7 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-    implementation("io.reactivex.rxjava3:rxjava")
+    implementation("io.reactivex.rxjava3:rxjava:3.1.5")
 
     implementation("com.h2database:h2")
     testImplementation("com.h2database:h2")

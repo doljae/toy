@@ -1,3 +1,3 @@
 rootProject.name = "toy"
 
-include("japring", "kopring", "toy-core", "toy-batch", "japring-webflux")
+include("japring", "kopring-exercise", "toy-core", "toy-batch", "japring-webflux", "kopring")
