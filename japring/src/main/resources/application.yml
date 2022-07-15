@@ -32,7 +32,11 @@ feign:
   client:
     config:
       default:
+        connectTimeout: 100
+        readTimeout: 1000
         loggerLevel: full
+  okhttp:
+    enabled: true
 
 logging:
   level:

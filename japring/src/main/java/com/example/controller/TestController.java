@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.HappyPerson;
 import com.example.domain.Color;
 import com.example.dto.ResponseDto;
+import com.example.feign.TestFeignClient;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,9 +21,23 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class TestController {
 
+    @Autowired
+    private TestFeignClient feignClient;
+
+    @GetMapping("/test2")
+    public ResponseEntity<Object> test2() {
+        feignClient.test(List.of(Color.RED));
+        return ResponseEntity.ok().body(null);
+    }
+
     @GetMapping("/test")
     public ResponseDto test(@RequestParam("types") List<Color> types) {
 
+        try {
+            Thread.sleep(100000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         types.forEach(color -> {
             System.out.println(color);
             System.out.println(color.getClass());
