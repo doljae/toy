@@ -229,34 +229,4 @@ class RedisRecordTest {
 //        final RequestRecord wrapped = requestWrapper.getWrapped();
 //        System.out.println(wrapped);
 //    }
-
-//    @Test
-//    void test12() throws JsonProcessingException {
-//        final Long valueWrapper = 10L;
-//        final long valuePrimitive = 10L;
-//
-//        final String primitiveKey = "long";
-//        final String wrapperKey = "Long";
-//
-//        redisLongTemplate.opsForValue().set(primitiveKey, valuePrimitive);
-//        redisLongTemplate.opsForValue().set(wrapperKey, valueWrapper);
-//
-////        final long result1 = redisLongTemplate.opsForValue().get(primitiveKey);
-//        final Long result2 = redisLongTemplate.opsForValue().get(wrapperKey);
-//    }
-//
-//    @Test
-//    void test13() throws JsonProcessingException {
-//        final Integer valueWrapper = 10;
-//        final int valuePrimitive = 10;
-//
-//        final String primitiveKey = "long";
-//        final String wrapperKey = "Long";
-//
-//        redisIntegerTemplate.opsForValue().set(primitiveKey, valuePrimitive);
-//        redisIntegerTemplate.opsForValue().set(wrapperKey, valueWrapper);
-//
-//        final int result1 = redisIntegerTemplate.opsForValue().get(primitiveKey);
-//        final Integer result2 = redisIntegerTemplate.opsForValue().get(wrapperKey);
-//    }
 }
