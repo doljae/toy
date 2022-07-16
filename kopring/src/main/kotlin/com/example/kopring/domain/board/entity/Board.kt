@@ -1,4 +1,4 @@
-package com.example.kopring.board.entity
+package com.example.kopring.domain.board.entity
 
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
