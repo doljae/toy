@@ -9,21 +9,24 @@ import javax.persistence.*
 @Entity
 @EntityListeners(AuditingEntityListener::class)
 class Board(
+    @Column(name = "title", nullable = false)
     var title: String,
+    @Column(name = "author", nullable = false)
     var author: String,
+    @Column(name = "content", length = 2000)
     var content: String?
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "id", nullable = false)
     var id: Long = 0
 
     @CreatedDate
-    @Column(updatable = false, nullable = false)
+    @Column(name = "created_at", updatable = false, nullable = false)
     var createdAt: OffsetDateTime = OffsetDateTime.now()
 
     @LastModifiedDate
-    @Column(nullable = false)
-    var modifiedAt: OffsetDateTime = OffsetDateTime.now()
+    @Column(name = "updated_at", nullable = false)
+    var updatedAt: OffsetDateTime = OffsetDateTime.now()
 
 }
