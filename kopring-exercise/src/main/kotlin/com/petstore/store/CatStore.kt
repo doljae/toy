@@ -1,7 +1,7 @@
 package com.petstore.store
 
-import com.petstore.pet.Cat
 import com.petstore.pet.Pet
+import com.petstore.pet.Cat
 
 class CatStore : Store {
 

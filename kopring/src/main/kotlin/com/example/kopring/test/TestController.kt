@@ -1,4 +1,4 @@
-package com.example.kopring.controller
+package com.example.kopring.test
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController

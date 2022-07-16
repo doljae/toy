@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 // kotlin의 class property는 반드시 초기화되거나 추상화되어야한다
 class PersonPerson {

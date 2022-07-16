@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 import com.jaredrummler.ktsh.Shell
 import java.io.File

@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 class InitOrderDemo(name: String) {
     // 클래스 내부에서 property 선언, init 블록은 동일한 우선순위를 가진다

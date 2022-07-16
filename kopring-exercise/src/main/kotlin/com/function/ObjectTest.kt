@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 object Foo {
     fun bar() = "bar"

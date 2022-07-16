@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 open class Fruit
 class Apple : Fruit()

@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 import kotlin.reflect.KProperty
 import kotlin.system.measureTimeMillis

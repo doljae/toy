@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 // Any는 최상위 클래스
 val greeting: Any = "Hello world"

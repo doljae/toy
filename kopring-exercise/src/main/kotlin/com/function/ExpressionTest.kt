@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 fun isPromotionTarget(addToCart: Boolean, rates: Int): Boolean = when {
     rates < 2 -> false

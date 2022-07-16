@@ -1,11 +1,11 @@
-package com.petstore
+package com.example.whiteboard.petstore
 
-import com.petstore.pet.Breed
-import com.petstore.pet.Cat
-import com.petstore.pet.Dog
-import com.petstore.pet.Gender
-import com.petstore.store.CatStore
-import com.petstore.store.DogStore
+//import com.petstore.pet.Breed
+//import com.petstore.pet.Cat
+//import com.petstore.pet.Dog
+//import com.petstore.pet.Gender
+//import com.petstore.store.CatStore
+//import com.petstore.store.DogStore
 
 //fun main() {
 //    val dogStore = DogStore()

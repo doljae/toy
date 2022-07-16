@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 import kotlin.random.Random
 

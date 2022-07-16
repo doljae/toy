@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 fun MutableList<Int>.swap(index1: Int, index2: Int) {
     val tmp = this[index1]

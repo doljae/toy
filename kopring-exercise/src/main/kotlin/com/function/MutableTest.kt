@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 // const val을 사용하면 불변성을 보장할 수 있으나 유연하지 않음
 object MutableVal {

@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 fun getTemperature(city: String): Double {
     println("fetch from webservice for$city")

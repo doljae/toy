@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 // delegator 단순 구현
 // 단점 1, JavaProgrammer에게만 요청할 수 있다

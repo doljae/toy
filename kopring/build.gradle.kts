@@ -7,34 +7,49 @@ plugins {
     kotlin("plugin.jpa") version "1.7.10"
 }
 
-dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+extra["kotestExtensionSpringVersion"] = "1.1.1"
+extra["kotlinJdslVersion"] = "2.0.4.RELEASE"
 
+dependencies {
+
+    // web
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    // persistent
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:${property("kotlinJdslVersion")}")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.projectreactor:reactor-test")
-    testImplementation("org.testcontainers:junit-jupiter")
-
-    testImplementation("org.testcontainers:mysql")
-    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.1")
-
-    // not used yet
     // implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     // implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
     // implementation("org.springframework.boot:spring-boot-starter-data-redis")
     // implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+
+    // test
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:${property("kotestExtensionSpringVersion")}")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:mysql")
+    testImplementation("io.projectreactor:reactor-test")
     // testImplementation("org.testcontainers:mongodb")
+
+
+    // maintenance
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    // serialization
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    // reactive
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
+    // etc
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 tasks.withType<KotlinCompile> {

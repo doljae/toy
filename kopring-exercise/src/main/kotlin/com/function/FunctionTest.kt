@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 data class Person(
     var name: String = "",

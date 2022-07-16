@@ -1,4 +1,4 @@
-package com.function
+package com.example.whiteboard.function
 
 // https://0391kjy.tistory.com/25?category=742907
 val numbers = mutableListOf("one", "two", "three", "four", "five")
