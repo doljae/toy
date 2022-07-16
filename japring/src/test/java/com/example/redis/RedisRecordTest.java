@@ -1,44 +1,43 @@
-//package com.example.redis;
-//
-//import java.time.OffsetDateTime;
-//
-//import org.junit.jupiter.api.DisplayName;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.data.redis.core.RedisTemplate;
-//
-//import com.fasterxml.jackson.annotation.JsonCreator;
-//import com.fasterxml.jackson.core.JsonProcessingException;
-//import com.fasterxml.jackson.databind.DeserializationFeature;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.databind.SerializationFeature;
-//import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-//import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-//import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-//
-//@SpringBootTest
-//class RedisRecordTest {
-//
-//    @Autowired
-//    private RedisTemplate<String, RequestRecord> redisRecordTemplate;
-//    @Autowired
-//    private RedisTemplate<String, RequestRecord2> redisRecordTemplate2;
-//    @Autowired
-//    private RedisTemplate<String, RequestDto> redisDtoTemplate;
-//    @Autowired
-//    private RedisTemplate<String, RequestDto2> redisDtoTemplate2;
-//    @Autowired
-//    private RedisTemplate<String, String> redisStringTemplate;
-//    @Autowired
-//    private RedisTemplate<String, Object> redisObjectTemplate;
-//    @Autowired
-//    private RedisTemplate<String, ClassicRequestWrapper> redisWrapperTemplate;
-//    @Autowired
-//    private RedisTemplate<String, RequestFinalDto> redisFinalDtoTemplate;
-//    @Autowired
-//    private ObjectMapper mapper;
-//
+package com.example.redis;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.redis.core.RedisTemplate;
+
+import com.example.configuration.RedisConfiguration;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@SpringBootTest
+@Import(RedisConfiguration.class)
+class RedisRecordTest {
+
+    @Autowired
+    private RedisTemplate<String, RequestRecord> redisRecordTemplate;
+    @Autowired
+    private RedisTemplate<String, RequestRecord2> redisRecordTemplate2;
+    @Autowired
+    private RedisTemplate<String, RequestDto> redisDtoTemplate;
+    @Autowired
+    private RedisTemplate<String, RequestDto2> redisDtoTemplate2;
+    @Autowired
+    private RedisTemplate<String, String> redisStringTemplate;
+    @Autowired
+    private RedisTemplate<String, Object> redisObjectTemplate;
+    @Autowired
+    private RedisTemplate<String, ClassicRequestWrapper> redisWrapperTemplate;
+    @Autowired
+    private RedisTemplate<String, RequestFinalDto> redisFinalDtoTemplate;
+    @Autowired
+    private ObjectMapper mapper;
+    @Autowired
+    private RedisTemplate<String, Long> redisLongTemplate;
+    @Autowired
+    private RedisTemplate<String, Integer> redisIntegerTemplate;
+
+
 //    @DisplayName("record -> String -> set() -> get() -> String -> record -> O")
 //    @Test
 //    void test() throws JsonProcessingException {
@@ -232,4 +231,34 @@
 //        final RequestRecord wrapped = requestWrapper.getWrapped();
 //        System.out.println(wrapped);
 //    }
-//}
+
+    @Test
+    void test12() throws JsonProcessingException {
+        final Long valueWrapper = 10L;
+        final long valuePrimitive = 10L;
+
+        final String primitiveKey = "long";
+        final String wrapperKey = "Long";
+
+        redisLongTemplate.opsForValue().set(primitiveKey, valuePrimitive);
+        redisLongTemplate.opsForValue().set(wrapperKey, valueWrapper);
+
+//        final long result1 = redisLongTemplate.opsForValue().get(primitiveKey);
+        final Long result2 = redisLongTemplate.opsForValue().get(wrapperKey);
+    }
+
+    @Test
+    void test13() throws JsonProcessingException {
+        final Integer valueWrapper = 10;
+        final int valuePrimitive = 10;
+
+        final String primitiveKey = "long";
+        final String wrapperKey = "Long";
+
+        redisIntegerTemplate.opsForValue().set(primitiveKey, valuePrimitive);
+        redisIntegerTemplate.opsForValue().set(wrapperKey, valueWrapper);
+
+        final int result1 = redisIntegerTemplate.opsForValue().get(primitiveKey);
+        final Integer result2 = redisIntegerTemplate.opsForValue().get(wrapperKey);
+    }
+}
