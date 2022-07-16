@@ -25,4 +25,5 @@ class Board(
     @LastModifiedDate
     @Column(nullable = false)
     var modifiedAt: OffsetDateTime = OffsetDateTime.now()
+
 }
