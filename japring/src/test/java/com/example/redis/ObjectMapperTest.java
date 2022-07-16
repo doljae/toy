@@ -78,6 +78,7 @@ class ObjectMapperTest {
                 .registerModule(new JavaTimeModule())
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                // new option
                 .configure(DeserializationFeature.USE_LONG_FOR_INTS, true);
 
         return mapper;
@@ -90,6 +91,7 @@ class ObjectMapperTest {
                 .registerModule(new JavaTimeModule())
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                // new option
                 .configure(DeserializationFeature.USE_LONG_FOR_INTS, true);
 
         mapper.activateDefaultTyping(mapper.getPolymorphicTypeValidator(),
