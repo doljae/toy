@@ -9,4 +9,5 @@ import org.springframework.stereotype.Service
 class BoardService(val boardRepository: BoardRepository) {
 
     fun getBoard(id: Long): Board? = boardRepository.findByIdOrNull(id)
+    fun getAllBoards(): List<Board> = boardRepository.findAll()
 }
