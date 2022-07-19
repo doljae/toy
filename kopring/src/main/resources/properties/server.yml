@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+server:
+  port: 13579
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+server:
+  port: 24680
