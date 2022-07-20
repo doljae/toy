@@ -33,23 +33,28 @@ class WebClientTest {
     }
 
     @Test
+    void healthCheck2() {
+        webClient.get().uri("/test/unauthorized").retrieve();
+    }
+
+    @Test
     void testUsingWebClient() throws InterruptedException {
         Mono<ResponseEntity<HappyPerson>> mono = webClient.get().uri(
-                                                              "localhost:1234/test/unauthorized").retrieve()
+                                                                  "localhost:1234/test/unauthorized").retrieve()
                                                           .onStatus(unauthorized,
                                                                     clientResponse -> Mono.error(
-                                                                        new CustomException(
-                                                                            "this is expected error 1")))
+                                                                            new CustomException(
+                                                                                    "this is expected error 1")))
                                                           .onStatus(unauthorized,
                                                                     clientResponse -> Mono.error(
-                                                                        new CustomException(
-                                                                            "this is expected error 2")))
+                                                                            new CustomException(
+                                                                                    "this is expected error 2")))
                                                           .onStatus(not(HttpStatus::is2xxSuccessful),
                                                                     clientResponse -> Mono.error(
-                                                                        new CustomException(
-                                                                            "this is expected error 3")))
+                                                                            new CustomException(
+                                                                                    "this is expected error 3")))
                                                           .toEntity(
-                                                              HappyPerson.class);
+                                                                  HappyPerson.class);
 
         Assertions.assertThrows(CustomException.class, mono::block);
     }

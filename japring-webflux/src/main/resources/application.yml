@@ -19,3 +19,5 @@ spring:
 logging:
   level:
     com.example.feign.TestFeignClient: DEBUG
+    reactor.netty.http.client.HttpClient: TRACE
+    root: trace
