@@ -1,8 +1,8 @@
 package com.example.feign;
 
-import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +15,7 @@ import feign.Response;
 import feign.RetryableException;
 import lombok.extern.slf4j.Slf4j;
 
-//@Disabled
+@Disabled
 @Slf4j
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class TestFeignClientTest {
@@ -30,7 +30,7 @@ class TestFeignClientTest {
     void test() {
         final Response response;
 //        try {
-            response = feignClient.test(List.of(Color.RED, Color.BLUE));
+        response = feignClient.test(List.of(Color.RED, Color.BLUE));
 //        } catch (RetryableException e) {
 //            log.error(e.toString());
 //            log.error(e.getMessage());

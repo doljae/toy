@@ -39,8 +39,13 @@ class RedisTemplateTest extends AbstractTestContainers {
         redisLongTemplate.opsForValue().set(wrapperKey, valueWrapper);
         redisLongTemplate.opsForValue().set(primitiveKey, valuePrimitive);
 
-        final Long wrapperResult = redisLongTemplate.opsForValue().get(wrapperKey);
-        final long primitiveResult = redisLongTemplate.opsForValue().get(primitiveKey);
+        try {
+            final Long wrapperResult = redisLongTemplate.opsForValue().get(wrapperKey);
+            final long primitiveResult = redisLongTemplate.opsForValue().get(primitiveKey);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @DisplayName("프로젝트 기본 설정, Value 타입을 Integer로 받을 때 ClassCastException이 발생한다")
@@ -103,8 +108,12 @@ class RedisTemplateTest extends AbstractTestContainers {
         redisLongTemplate.opsForValue().set(wrapperKey, valueWrapper);
         redisLongTemplate.opsForValue().set(primitiveKey, valuePrimitive);
 
-        final Long wrapperResult = redisLongTemplate.opsForValue().get(wrapperKey);
-        final long primitiveResult = redisLongTemplate.opsForValue().get(primitiveKey);
+        try {
+            final Long wrapperResult = redisLongTemplate.opsForValue().get(wrapperKey);
+            final long primitiveResult = redisLongTemplate.opsForValue().get(primitiveKey);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static ObjectMapper objectMapperAdjustedV1Version() {

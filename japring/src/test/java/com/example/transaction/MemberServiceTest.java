@@ -1,18 +1,21 @@
 package com.example.transaction;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.UnexpectedRollbackException;
+
+import com.example.containers.AbstractTestContainers;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootTest
-class MemberServiceTest {
+class MemberServiceTest extends AbstractTestContainers {
 
     @Autowired
     MemberService memberService;
@@ -40,7 +43,8 @@ class MemberServiceTest {
 
         assertThrows(RuntimeException.class, () -> memberService.joinV1(username));
 
-        assertTrue(memberRepository.find(username).isPresent());
+        // ?
+        assertFalse(memberRepository.find(username).isPresent());
         assertTrue(logRepository.find(username).isEmpty());
 
     }
@@ -59,9 +63,10 @@ class MemberServiceTest {
     void recoverException_fail() {
         final String username = "로그예외_recoverException_fail";
 
-        assertThrows(UnexpectedRollbackException.class, () -> memberService.joinV2(username));
+        //
+        assertDoesNotThrow(() -> memberService.joinV2(username));
 
-        assertTrue(memberRepository.find(username).isEmpty());
+        assertFalse(memberRepository.find(username).isEmpty());
         assertTrue(logRepository.find(username).isEmpty());
     }
 

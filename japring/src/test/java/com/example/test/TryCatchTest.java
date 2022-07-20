@@ -8,7 +8,7 @@ class TryCatchTest {
     @Test
     void test() {
         // fail
-        Assertions.assertThrows(AccountTokenExpiredException.class, this::testMethod);
+        Assertions.assertThrows(AccountNotVerifiedException.class, this::testMethod);
     }
 
     private void testMethod() {

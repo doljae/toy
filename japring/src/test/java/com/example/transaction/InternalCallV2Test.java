@@ -10,12 +10,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import com.example.containers.AbstractTestContainers;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootTest
-class InternalCallV2Test {
+class InternalCallV2Test extends AbstractTestContainers {
 
     @Autowired
     private CallService callService;
@@ -23,7 +25,7 @@ class InternalCallV2Test {
     @Test
     void printProxy() {
         log.info("aop class={}", callService.getClass());
-        Assertions.assertThat(AopUtils.isAopProxy(callService)).isTrue();
+        Assertions.assertThat(AopUtils.isAopProxy(callService)).isFalse();
     }
 
     @Test
@@ -58,7 +60,7 @@ class InternalCallV2Test {
 
         private void printTxInfo() {
             final boolean actualTransactionActive =
-                TransactionSynchronizationManager.isActualTransactionActive();
+                    TransactionSynchronizationManager.isActualTransactionActive();
             log.info("tx active={}", actualTransactionActive);
         }
     }
@@ -73,7 +75,7 @@ class InternalCallV2Test {
 
         private void printTxInfo() {
             final boolean actualTransactionActive =
-                TransactionSynchronizationManager.isActualTransactionActive();
+                    TransactionSynchronizationManager.isActualTransactionActive();
             log.info("tx active={}", actualTransactionActive);
         }
     }

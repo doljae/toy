@@ -5,6 +5,7 @@ import static java.util.function.Predicate.not;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,7 @@ import com.example.exception.CustomException;
 
 import reactor.core.publisher.Mono;
 
+@Disabled
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class WebClientTest {
 

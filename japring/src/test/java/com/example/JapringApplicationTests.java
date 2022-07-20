@@ -2,11 +2,11 @@ package com.example;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients
+import com.example.containers.AbstractTestContainers;
+
 @SpringBootTest
-class JapringApplicationTests {
+class JapringApplicationTests extends AbstractTestContainers {
 
     @Test
     void contextLoads() {
