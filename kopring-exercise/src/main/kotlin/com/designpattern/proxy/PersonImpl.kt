@@ -37,6 +37,7 @@ class PersonImpl(
     }
 
     override fun setGeekRating(rating: Int) {
-        this.rating = rating
+        this.rating += rating
+        ratingCount++
     }
 }
