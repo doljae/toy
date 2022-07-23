@@ -29,4 +29,23 @@ class Board(
     @Column(name = "updated_at", nullable = false)
     var updatedAt: OffsetDateTime = OffsetDateTime.now()
 
+    companion object {
+        fun toDao(board: Board) = BoardDao(
+            board.title,
+            board.author,
+            board.content,
+            board.id,
+            board.createdAt,
+            board.updatedAt
+        )
+    }
 }
+
+data class BoardDao(
+    val title: String,
+    val author: String,
+    val content: String?,
+    var id: Long,
+    val createdDate: OffsetDateTime,
+    val updatedAt: OffsetDateTime
+)
