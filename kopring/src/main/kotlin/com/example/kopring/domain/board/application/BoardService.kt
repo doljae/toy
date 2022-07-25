@@ -20,6 +20,7 @@ class BoardService(
         val (title, author, content) = boardRequest
         val board = Board(title, author, content)
         boardRepository.save(board)
+
     }
 
     fun getBoardDao(id: Long): BoardDao = boardRepositoryDecorator.findById(id)
