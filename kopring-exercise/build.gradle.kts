@@ -21,9 +21,11 @@ dependencies {
     implementation("com.h2database:h2")
     testImplementation("com.h2database:h2")
 
-    implementation ("com.jaredrummler:ktsh:1.0.0")
+    implementation("com.jaredrummler:ktsh:1.0.0")
 
     implementation("org.springframework.statemachine:spring-statemachine-starter:3.2.0")
+
+    implementation("io.github.nsk90:kstatemachine:0.9.5")
 }
 
 tasks.withType<KotlinCompile> {
