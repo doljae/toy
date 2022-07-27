@@ -25,4 +25,6 @@ fun main() {
     }
 
     machine.processEvent(LoginEvent(LoginData("test@gmail.com", "qwerty")))
+
+    exportUml(machine, "typesafetransition")
 }
