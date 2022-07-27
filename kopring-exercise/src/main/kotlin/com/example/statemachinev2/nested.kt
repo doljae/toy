@@ -1,9 +1,6 @@
 package com.example.statemachinev2
 
 import ru.nsk.kstatemachine.*
-import ru.nsk.kstatemachine.visitors.exportToPlantUml
-import java.io.File
-import java.nio.file.Paths
 
 object SwitchEvent : Event
 
@@ -29,8 +26,6 @@ fun main() {
             transition<SwitchEvent>()
         }
     }
-    val path = Paths.get("").toAbsolutePath().toString()
-    val exportToPlantUml = machine.exportToPlantUml()
-    File("$path/nested.puml").writeText(exportToPlantUml)
 
+    exportUml(machine, "nested")
 }

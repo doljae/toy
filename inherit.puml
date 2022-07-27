@@ -1,0 +1,18 @@
+@startuml
+hide empty description
+state Finish
+state State1 {
+    state State1_1
+    state State1_2
+    state State1_3
+    
+    [*] --> State1_1
+    State1_1 --> State1_2
+    State1_2 --> State1_3
+    State1_3 --> State1_1
+}
+
+[*] --> State1
+State1 --> Finish : Exit
+Finish --> [*]
+@enduml

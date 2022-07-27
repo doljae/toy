@@ -1,6 +1,9 @@
 package com.example.statemachinev2
 
 import ru.nsk.kstatemachine.*
+import ru.nsk.kstatemachine.visitors.exportToPlantUml
+import java.io.File
+import java.nio.file.Paths
 
 sealed class Events {
     object NextEvent : Event
@@ -25,7 +28,7 @@ fun main() {
             }
         }
         addState(States.YellowState) {
-            transition<Events.NextEvent>{
+            transition<Events.NextEvent> {
                 targetState = States.YellowState
                 onTriggered { println("Transition triggered") }
             }
@@ -41,4 +44,10 @@ fun main() {
 
     machine.processEvent(Events.NextEvent)
     machine.processEvent(Events.NextEvent)
+}
+
+fun exportUml(machine: StateMachine, fileName: String) {
+    val path = Paths.get("").toAbsolutePath().toString()
+    val exportToPlantUml = machine.exportToPlantUml()
+    File("$path/$fileName.puml").writeText(exportToPlantUml)
 }
