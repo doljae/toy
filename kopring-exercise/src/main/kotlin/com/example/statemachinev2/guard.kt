@@ -15,7 +15,7 @@ fun main() {
 
         val finalState = addFinalState(States1.FinalState())
 
-        addInitialState(States1.InitialState(42)) {
+        addInitialState(States1.InitialState(2)) {
             transition<SwitchEvent1> {
                 guard = { this@addInitialState.value > 10 }
                 targetState = finalState

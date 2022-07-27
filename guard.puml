@@ -1,0 +1,9 @@
+@startuml
+hide empty description
+state State_2
+state State_1
+
+[*] --> State_1
+State_1 --> State_2
+State_2 --> [*]
+@enduml
