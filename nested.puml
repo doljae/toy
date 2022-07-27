@@ -1,0 +1,20 @@
+@startuml
+hide empty description
+state State1
+state State3
+state State2 {
+    state Final_subState
+    state initial_substate
+    
+    [*] --> initial_substate
+    initial_substate --> Final_subState
+    Final_subState --> [*]
+}
+
+[*] --> State1
+State1 --> State2 : to State2
+State1 --> State1
+State2 --> State3
+State2 --> State1 : back
+State3 --> [*]
+@enduml
