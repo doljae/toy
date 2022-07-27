@@ -1,0 +1,11 @@
+@startuml
+hide empty description
+state State1067938912
+state State1023714065
+state State1330106945
+
+[*] --> State1023714065
+State1067938912 --> State1023714065
+State1023714065 --> State1023714065
+State1330106945 --> [*]
+@enduml
