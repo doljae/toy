@@ -2,9 +2,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.springframework.boot")
-    kotlin("jvm") version "1.6.21"
-    kotlin("plugin.spring") version "1.6.21"
-    kotlin("plugin.jpa") version "1.6.21"
+    kotlin("jvm") version "1.7.10"
+    kotlin("plugin.spring") version "1.7.10"
+    kotlin("plugin.jpa") version "1.7.10"
 }
 
 dependencies {
