@@ -4,11 +4,11 @@ plugins {
     id("org.springframework.boot")
     kotlin("jvm") version "1.7.10"
     kotlin("plugin.spring") version "1.7.10"
-    kotlin("plugin.jpa") version "1.7.10"
+    kotlin("kapt") version "1.7.10"
 }
 
-extra["kotestExtensionSpringVersion"] = "1.1.1"
-extra["kotlinJdslVersion"] = "2.0.4.RELEASE"
+extra["kotestVersion"] = "1.1.1"
+extra["mysqlVersion"] = "2.0.8"
 
 dependencies {
 
@@ -16,23 +16,17 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
 
     // persistent
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:${property("kotlinJdslVersion")}")
     runtimeOnly("com.h2database:h2")
+    runtimeOnly("io.r2dbc:r2dbc-h2")
     runtimeOnly("mysql:mysql-connector-java")
-    // implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    // implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
-    // implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    // implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+    implementation("com.github.jasync-sql:jasync-r2dbc-mysql:${property("mysqlVersion")}")
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.kotest.extensions:kotest-extensions-spring:${property("kotestExtensionSpringVersion")}")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:${property("kotestVersion")}")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:mysql")
     testImplementation("io.projectreactor:reactor-test")
-    // testImplementation("org.testcontainers:mongodb")
-
 
     // maintenance
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -49,7 +43,7 @@ dependencies {
     // etc
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 tasks.withType<KotlinCompile> {
