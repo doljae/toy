@@ -13,6 +13,7 @@ extra["mysqlVersion"] = "2.0.8"
 dependencies {
 
     // persistent
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("com.github.jasync-sql:jasync-r2dbc-mysql:${property("mysqlVersion")}")
 
     // test

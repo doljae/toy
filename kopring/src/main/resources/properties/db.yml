@@ -2,15 +2,13 @@ spring:
   config:
     activate:
       on-profile: local
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-  h2:
-    console:
-      enabled: true
-  datasource:
-    url: jdbc:h2:mem:testdb
-
+  r2dbc:
+    url: r2dbc:mysql://localhost:3307/toy?allowPublicKeyRetrieval=true&useSSL=false
+    username: user
+    password: user
+  sql:
+    init:
+      schema-locations: classpath:/schema.sql
 ---
 
 spring:

@@ -5,3 +5,8 @@ spring:
       - properties/db.yml
   profiles:
     active: local
+
+logging:
+  level:
+    root: trace
+    org.springframework.r2dbc: debug
