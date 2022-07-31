@@ -12,13 +12,7 @@ extra["mysqlVersion"] = "2.0.8"
 
 dependencies {
 
-    // web
-    implementation("org.springframework.boot:spring-boot-starter-web")
-
     // persistent
-    runtimeOnly("com.h2database:h2")
-    runtimeOnly("io.r2dbc:r2dbc-h2")
-    runtimeOnly("mysql:mysql-connector-java")
     implementation("com.github.jasync-sql:jasync-r2dbc-mysql:${property("mysqlVersion")}")
 
     // test
@@ -44,6 +38,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     kapt("org.springframework.boot:spring-boot-configuration-processor")
+    kapt(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
 }
 
 tasks.withType<KotlinCompile> {
