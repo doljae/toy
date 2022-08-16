@@ -5,7 +5,7 @@ import kotlinx.coroutines.reactive.awaitFirstOrNull
 import org.springframework.stereotype.Service
 
 @Service
-class UserService(private val repo: UserRepository) {
+class UserService(private val repo: UsersRepository) {
 
     suspend fun findAll() = repo.findAll().asFlow()
     suspend fun findById(id: Long) = repo.findById(id).awaitFirstOrNull()
