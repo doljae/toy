@@ -11,7 +11,7 @@ import com.example.domain.Color;
 
 import feign.Response;
 
-@FeignClient(name = "test-feign", url = "http://localhost:1234")
+@FeignClient(value = "thisIsFeignClientName", url = "http://localhost:1234")
 public interface TestFeignClient {
 
     @GetMapping("/test")
