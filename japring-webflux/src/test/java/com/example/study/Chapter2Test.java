@@ -1,5 +1,7 @@
 package com.example.study;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -21,5 +23,10 @@ class Chapter2Test {
             emitter.onNext("World");
             emitter.onComplete();
         }).subscribe(System.out::println, System.out::println, () -> System.out.println("Done"));
+    }
+
+    @Test
+    void test2() {
+//        Observable.concat(List.of("hello", "world")).forEach(System.out::print);
     }
 }
