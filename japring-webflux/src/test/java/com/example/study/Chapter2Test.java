@@ -54,4 +54,11 @@ class Chapter2Test {
             emitter.onComplete();
         }).subscribe(System.out::println);
     }
+
+    @Test
+    void fromArray() {
+        Integer[] array = { 1, 2, 3, 4, 5 };
+        Disposable s = Observable.fromArray(array)
+                                 .subscribe(System.out::println);
+    }
 }
